@@ -10,7 +10,9 @@ The bird will fly across the screen randomly, probably along a slightly curved p
 the user touches during gameplay, then they will fall and lose the game.
 
 #### Goat
-
+The goat will act like a "bonus" to add to the users score if they user collides with the goat.
+There will be a "string" that goes between the two walls on each side of the window and
+the goat will move across this string.
 
 #### Object 1
 
@@ -26,14 +28,16 @@ in order to avoid enemies or obstacles that will cause them to fall.
 ----
 
 ## 3. Score Tracking
-Score will be tracked by how high the player gets (higher up the building, higher the score).
-There will also be 
+Score will be tracked by how high the player gets (the higher up the mountain, the higher the score).
+There will also be goats to add bonuses to the score.
+
 ----
 
 ## 4. Player Life Tracking
-Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the game end.
-If I need to give them lives, I would allow them to fall and die once, and they will respawn
-where they left off.
+Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the game ends.
+If I need to give them lives, they will respawn from the height (which will be kept track of) where
+they had fallen off from.
+
 ----
 
 ## 5. User Interface Design
