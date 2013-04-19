@@ -1,89 +1,40 @@
-# Game Design Document
-This is a place holder for your game design document. You are advised to write your document in [Markdown](http://daringfireball.net/projects/markdown/) and the following section will show you how to write a document using Markdown markup.
+# Ice Climber
 
-Alternativley, you can write your document in plain text if you wish.
+## 1. Game Objects/Things
+#### Icicle
+This will be my static object that, if the user touches, will fall off and die. It will
+stick out along the wall, making the user jump across to avoid it.
 
-----
+#### Bird
+The bird will fly across the screen randomly, probably along a slightly curved path. If
+the user touches during gameplay, then they will fall and lose the game.
 
-## Markdown
-Markdown is a human-readable structured plain text format that is used to convert text into HTML. GitHub automatically renders Markdown into HTML.
-
-This is a crash course on how to use Markdown. The following section will show you the plain text used to generate the document shown in the rendering section.
-
-### Code
-
-```
-# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-
-You can also write in **bold** or _italics_. You can also ~~strike through~~ or write inline `Code Segments`
-
->Blockquotes are done as such.
-
-Just make sure to separate paragraphs with an emptyline. 
-Otherwise, they are considered in the same paragraph.
-
-You link to [Google](https://www.google.com) as such and lists are written has follows:
-  1. First you indent with two empty spaces.
-  1. Then, you use:
-    * `1.` to signal an ordered (i.e. numbered) list, or
-    * `*`, `-`, `+` to represent an unordered list.
-      1. Make sure to maintain indentation
-      1. As it is used to identify sub-lists
-  1. Numbering and symboles don't matter as they are auto-generated later.
-
-Tables are pretty easy to make:
-
-| Tables        | Are           | Easy          |
-| ------------- |:-------------:| -------------:|
-| left-aligned  | centered      | right-aligned |
-| header are    | bolded and    | centered      |
-| zebra stripes | are neat      | 1             |
+#### Goat
 
 
-Images are added inline by using the following syntax
-![alt text](http://octodex.github.com/images/Professortocat_v2.png "Image Title")
-```
+#### Object 1
+
+#### Object 1
 
 ----
 
-### Rendering
-This section shows the rendering of the plain text above.
+## 2. Gameplay
+Gameplay will be controlled just by the space bar where the character will switch sides
+(going from wall to wall on each side) upon press. The player will need to switch sides
+in order to avoid enemies or obstacles that will cause them to fall.
 
-# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
+----
 
-You can also write in **bold** or _italics_. You can also ~~strike through~~ or write inline `Code Segments`
+## 3. Score Tracking
+Score will be tracked by how high the player gets (higher up the building, higher the score).
+There will also be 
+----
 
->Blockquotes are done as such.
+## 4. Player Life Tracking
+Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the game end.
+If I need to give them lives, I would allow them to fall and die once, and they will respawn
+where they left off.
+----
 
-Just make sure to separate paragraphs with an emptyline. 
-Otherwise, they are considered in the same paragraph.
-
-You link to [Google](https://www.google.com) as such and lists are written has follows:
-  1. First you indent with two empty spaces.
-  1. Then, you use:
-    * `1.` to signal an ordered (i.e. numbered) list, or
-    * `*`, `-`, `+` to represent an unordered list.
-      1. Make sure to maintain indentation
-      1. As it is used to identify sub-lists
-  1. Numbering and symboles don't matter as they are auto-generated later.
-
-Tables are pretty easy to make:
-
-| Tables        | Are           | Easy          |
-| ------------- |:-------------:| -------------:|
-| left-aligned  | centered      | right-aligned |
-| header are    | bolded and    | centered      |
-| zebra stripes | are neat      | 1             |
-
-
-Images are added inline by using the following syntax
-![alt text](http://octodex.github.com/images/Professortocat_v2.png "Image Title")
+## 5. User Interface Design
 

@@ -1,8 +1,8 @@
 # Game - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Marcus Eng
+  + USC Email: marcuste@usc.edu
+  + USC ID: 5075243074
 
 ### Game Information
   + Game Name: myAwsomeGame
