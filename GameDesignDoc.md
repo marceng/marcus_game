@@ -1,4 +1,9 @@
 # Mountain Climber
+The purpose of the game is to climb as high as you can by jumping from wall to wall while
+avoiding obstacles. There will be animals that make you fall as well as those that act
+as powerups.
+
+----
 
 ## 1. Game Objects/Things
 #### Icicle
@@ -16,15 +21,20 @@ There will be a rope that goes between the two walls on each side of the window 
 the goat will move across this rope. The goat as well as the rope (two separate objects) should
 be simple images imported into the program. (The user will be able to go through the rope)
 
-#### Snow Monkey
-The snow monkey will move jump across each side of the screen (or each wall of the mountain),
-making it difficult to catch. It will be relatively small, and will climb the mountain also,
-avoiding obstacles. If the user catches (or collides) with it, then the user will be "invincible"
-for a certain time/height (being unaffected by birds and icicles) as they would run through/clip
-the things that normally would make them fall. The snow monkey will not show up very often and
+#### Star
+The star will move jump across each side of the screen (or each wall of the mountain),
+making it difficult to catch. It will be relatively small, and will ascend the mountain also.
+The star will be able to go through obstacles like icicles and will go across the screen randomly.
+If the user catches (or collides) with it, then the user will become "invincible"
+for a certain height (being unaffected by birds and icicles) as they would run through/clip
+the things that normally would make them fall. The star will not show up very often and
 will be from an imported image.
 
-#### Object 1
+#### Snow Monkey
+The snow monkey will climb up and down along the walls. If the player comes in contact with
+a monkey, then they will fall down and lose. The snow monkey will not jump across the screen,
+rather, it will only stay on one side where it will ascend and descend randomly. It will
+be created from an image on the internet.
 
 ----
 
@@ -39,18 +49,17 @@ higher up the mountain.
 
 ## 3. Score Tracking
 Score will be tracked by how high the player gets (the higher up the mountain, the higher the score).
-There will also be goats to add bonuses to the score.
+There will also be goats to add bonuses to the score. There is no way to have your score go down.
 
 ----
 
 ## 4. Player Life Tracking
 Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the game ends.
 If I need to give them lives, they will respawn from the height (which will be kept track of) where
-they had fallen off from.
+they had fallen off from, deducting one of their lives.
 
 ----
 
 ## 5. User Interface Design
 
 
-----
