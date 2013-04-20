@@ -66,6 +66,6 @@ pull up the menu if pressed. Everytime the space bar is pressed, the player will
 other wall on the screen. The player should be held in the same place while the everything
 else on the screen should scroll down, giving the effect of climbing up.
 
-![alt text](http://happycowcaramels.com/wp-content/uploads/2012/11/Happy-Cow-clip-art-.jpg "Image Title")
+![alt text](http://codenym.com/UI_Sketch.png "Image Title")
 
 
