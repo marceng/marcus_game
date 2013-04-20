@@ -61,5 +61,9 @@ they had fallen off from, deducting one of their lives.
 ----
 
 ## 5. User Interface Design
+Only the space bar will be used for gameplay. There will also be a listener for "P" that will
+pull up the menu if pressed. Everytime the space bar is pressed, the player will jump to the
+other wall on the screen. The player should be held in the same place while the everything
+else on the screen should scroll down, giving the effect of climbing up.
 
-
+![alt text](http://www-scf.usc.edu/~marcuste/UI_Sketch.png "UI Sketch")
