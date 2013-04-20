@@ -68,4 +68,3 @@ else on the screen should scroll down, giving the effect of climbing up.
 
 ![alt text](http://www-scf.usc.edu/~marcuste/uisketch.png "UI Sketch")
 
-
