@@ -66,5 +66,6 @@ pull up the menu if pressed. Everytime the space bar is pressed, the player will
 other wall on the screen. The player should be held in the same place while the everything
 else on the screen should scroll down, giving the effect of climbing up.
 
-![alt text](http://www-scf.usc.edu/~marcuste/UI_Sketch.png "UI Sketch")
+![alt text](http://www-scf.usc.edu/~marcuste/UI_Sketch.png "Image Title")
+
 
