@@ -54,9 +54,9 @@ There will also be goats to add bonuses to the score. There is no way to have yo
 ----
 
 ## 4. Player Life Tracking
-Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the game ends.
-If I need to give them lives, they will respawn from the height (which will be kept track of) where
-they had fallen off from, deducting one of their lives.
+Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the
+game ends. If I need to give them lives, they will respawn from the height (which will be kept track
+of) where they had fallen off from, deducting one of their lives.
 
 ----
 
