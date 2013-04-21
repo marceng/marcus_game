@@ -52,13 +52,13 @@ class MainWindow : public QWidget
 		
 		void loadObjects();
 		void loadOpening();
-		void loadGame();
+		void begin();
 		void dismissOpening();
 
 	public slots:
 		/** Handles the timer to move tiles*/
 		void animate();
-		void loadWindow();
+		void loadGame();
 	};
 
 #endif // MAINWINDOW_H

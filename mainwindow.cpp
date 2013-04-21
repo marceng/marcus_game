@@ -24,7 +24,7 @@ MainWindow::MainWindow()
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
 	}
 
-/** Displays the board onto the computer screen
+/** Displays the game onto the computer screen
  	* @param nothing
  	* @return nothing
  	*/
@@ -68,12 +68,12 @@ void MainWindow::loadOpening()
 
 	//---Creating Start Button---//
 	start = new QPushButton("Begin!"); 
-	connect(start, SIGNAL(clicked()), this, SLOT(loadWindow()));
+	connect(start, SIGNAL(clicked()), this, SLOT(loadGame()));
 	start->setGeometry(WINDOW_MAX_X/2-30, WINDOW_MAX_Y/2+180, 60, 60);
 	startScreen->addWidget(start);
 	}
 
-void MainWindow::loadGame()
+void MainWindow::begin()
 	{
 	gameScreen = new QGraphicsScene();
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
@@ -96,16 +96,16 @@ void MainWindow::dismissOpening()
 	
 //---Slots---//
 
-/** When timer is activated, calls this function to animate tile movement
+/** When timer is activated, begins the game
  	* @param nothing
  	* @return nothing
  	*/
-void MainWindow::animate() //figure out way to disable movement while in animation.
+void MainWindow::animate()
 	{		
 
 	}
 
-void MainWindow::loadWindow()
+void MainWindow::loadGame()
 	{
 	userName = nameInput->text();
 	if(userName == "")
@@ -115,7 +115,7 @@ void MainWindow::loadWindow()
 		}
 	
 	dismissOpening();
-	loadGame();
+	begin();
 	}
 
 /** Destructor that deallocates memory */
