@@ -35,6 +35,7 @@ class MainWindow : public QWidget
 	private:
 		//---Graphics Stuff---//
 		QGraphicsScene *startScreen;
+		QGraphicsScene *gameScreen;
 		QGraphicsView *view;
 		
 		QTimer *timer;
@@ -44,17 +45,20 @@ class MainWindow : public QWidget
 		QGraphicsPixmapItem *background;
 		
 		//---Start Screen---//
-		QLineEdit *nameInput;
+		QLabel *title;
 		QLabel *display;
+		QLineEdit *nameInput;
 		QPushButton *start;
 		
 		void loadObjects();
 		void loadOpening();
+		void loadGame();
+		void dismissOpening();
 
 	public slots:
 		/** Handles the timer to move tiles*/
 		void animate();
-		void loadGame();
+		void loadWindow();
 	};
 
 #endif // MAINWINDOW_H
