@@ -15,6 +15,8 @@
 #include <cstdlib>
 #include <vector>
 
+#include "star.h"
+
 #define WINDOW_MAX_X 601
 #define WINDOW_MAX_Y 601
 
@@ -43,6 +45,15 @@ class MainWindow : public QWidget
 		
 		//---Game Objects---//
 		QGraphicsPixmapItem *background;
+		QPixmap *wall;
+		QPixmap *icicle;
+		QPixmap *bird;
+		QPixmap *goat;
+		QPixmap *star;
+		QPixmap *monkey;
+		QPixmap *playerA;
+		QPixmap *playerB;
+
 		
 		//---Start Screen---//
 		QLabel *title;

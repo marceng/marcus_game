@@ -30,13 +30,13 @@ MainWindow::MainWindow()
  	*/
 void MainWindow::show()
 	{
-  	timer->start();
    view->show();
 	}
 
 void MainWindow::loadObjects()
 	{
 	background = new QGraphicsPixmapItem(QPixmap("Images/Background.png"));
+	star = new QPixmap("Images/Star.png");
 	}
 
 void MainWindow::loadOpening()
@@ -80,6 +80,12 @@ void MainWindow::begin()
    view->setScene( gameScreen );
    
    gameScreen->addItem(background);
+   
+   
+   gameScreen->addItem(Star(star, 0, 0, star->width(), star->height()));
+   timer->start();
+   
+   
 	}
 
 void MainWindow::dismissOpening()
