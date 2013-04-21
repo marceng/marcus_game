@@ -77,9 +77,8 @@ void MainWindow::loadGame()
 	{
 	gameScreen = new QGraphicsScene();
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
-   view = new QGraphicsView( gameScreen );
+   view->setScene( gameScreen );
    
-   cout << "HERE" << endl;
    gameScreen->addItem(background);
 	}
 
@@ -114,8 +113,6 @@ void MainWindow::loadWindow()
 		display->setText("Error! Enter your name");
 		return;
 		}
-
-	cout << "Loading Game..." << endl;
 	
 	dismissOpening();
 	loadGame();
@@ -126,8 +123,12 @@ MainWindow::~MainWindow()
 	{
    timer->stop();
    delete timer;
+   
+   delete background;
+   
    delete start;
    delete startScreen;
+   delete gameScreen;
    delete view;
 	}
 
