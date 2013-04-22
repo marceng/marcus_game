@@ -88,11 +88,11 @@ void MainWindow::begin()
    gameScreen->setFocus();
    gameScreen->addItem(background);
    
-   StaticObject *right = new StaticObject(wall, 'w', 0, 0, 0, WINDOW_MAX_X, false);
+   StaticObject *right = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
    gameScreen->addItem(right);
    objects.push_back(right);	
    
-   StaticObject *left = new StaticObject(wall, 'w', 0, 0, 0, WINDOW_MAX_X, true);
+   StaticObject *left = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, true);
    gameScreen->addItem(left);
    objects.push_back(left);
    
@@ -124,7 +124,7 @@ void MainWindow::generateObjects()
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
    
-   StaticObject *myRope = new StaticObject(rope, 'r', 0, 40+goat->height(), leftBound, rightBound, true);
+   StaticObject *myRope = new StaticObject(rope, 'r', 40+goat->height(), leftBound, rightBound, true);
    gameScreen->addItem(myRope);
    objects.push_back(myRope);
   
@@ -132,16 +132,12 @@ void MainWindow::generateObjects()
    //Bird *myBird = new Bird(bird, -bird->width(), 300, false);
    gameScreen->addItem(myBird);
    objects.push_back(myBird);
-  
-   Monkey *myMonkey = new Monkey(monkey, 90, 0, leftBound, rightBound, false);
-   gameScreen->addItem(myMonkey);
-   objects.push_back(myMonkey);
    
    Monkey *myMonkey = new Monkey(monkey, 150, leftBound, rightBound, true);
    gameScreen->addItem(myMonkey);
    objects.push_back(myMonkey);
 
-   StaticObject *ice = new StaticObject(icicle, 'i', 0, 90, leftBound, rightBound, true);
+   StaticObject *ice = new StaticObject(icicle, 'i', 90, leftBound, rightBound, true);
    gameScreen->addItem(ice);
    objects.push_back(ice);
   	*/
@@ -171,11 +167,11 @@ void MainWindow::handleOffscreen()
 	//---Generating New Walls---//
 	if(needWall)
 		{
-		StaticObject *right = new StaticObject(wall, 'w', 0, -wall->height()+1, 0, WINDOW_MAX_X, false);
+		StaticObject *right = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false);
 		gameScreen->addItem(right);
 		objects.push_back(right);	
 		
-		StaticObject *left = new StaticObject(wall, 'w', 0, -wall->height()+1, 0, WINDOW_MAX_X, true);
+		StaticObject *left = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, true);
 		gameScreen->addItem(left);
 		objects.push_back(left);
 		
