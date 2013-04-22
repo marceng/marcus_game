@@ -15,12 +15,12 @@ void Star::move()
 	
 	if(isLeft)
 		{
-		x = x-2;
+		x -= 2;
 		}
 	
 	else
 		{
-		x = x+2;
+		x += 2;
 		}
 		
 	y = y+.5;

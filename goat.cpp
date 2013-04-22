@@ -12,12 +12,12 @@ void Goat::move()
 
 	if(isLeft)
 		{
-		x = x - .5;
+		x -= .5;
 		}
 	
 	else
 		{
-		x = x + .5;
+		x += .5;
 		}
 	
 	int number = (int) rand() % 4000;
@@ -35,6 +35,6 @@ void Goat::move()
 			}
 		}
 	
-	//++y;
+	++y;
 	this->setPos(x, y);
 	}

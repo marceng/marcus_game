@@ -99,13 +99,11 @@ void MainWindow::begin()
    leftBound = left->getWidth();
    rightBound = WINDOW_MAX_X - right->getWidth();
 
-   Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
-   gameScreen->addItem(myGoat);
-   objects.push_back(myGoat);
-   
-   StaticObject *myRope = new StaticObject(rope, 'r', 0, 40+goat->height(), leftBound, rightBound, true);
-   gameScreen->addItem(myRope);
-   objects.push_back(myRope);
+   Bird *myBird = new Bird(bird, WINDOW_MAX_X+bird->width(), 300, true);
+   //Bird *myBird = new Bird(bird, -bird->width(), 300, false);
+   gameScreen->addItem(myBird);
+   objects.push_back(myBird);
+
    timer->start();
 	}
 
@@ -131,17 +129,13 @@ void MainWindow::generateObjects()
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
    
-   Bird *myBird = new Bird(bird, 200, 280, false);
-   gameScreen->addItem(myBird);
-   objects.push_back(myBird);
+   StaticObject *myRope = new StaticObject(rope, 'r', 0, 40+goat->height(), leftBound, rightBound, true);
+   gameScreen->addItem(myRope);
+   objects.push_back(myRope);
    
    Monkey *myMonkey = new Monkey(monkey, 90, 0, leftBound, rightBound, false);
    gameScreen->addItem(myMonkey);
    objects.push_back(myMonkey);
-   
-   StaticObject *myRope = new StaticObject(rope, 'r', 0, 90, leftBound, rightBound, true);
-   gameScreen->addItem(myRope);
-   objects.push_back(myRope);
    
    StaticObject *ice = new StaticObject(icicle, 'i', 0, 90, leftBound, rightBound, true);
    gameScreen->addItem(ice);
@@ -162,7 +156,7 @@ void MainWindow::handleOffscreen()
 		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
 			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
-			//cout << "Deleting: " << (*it)->getObject() << endl;
+			cout << "Deleting: " << (*it)->getObject() << endl;
 			(*it)->hide();
 			delete (*it);
 			objects.erase(it);
