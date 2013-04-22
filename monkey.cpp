@@ -8,17 +8,7 @@ Monkey::Monkey(QPixmap *i, double x, double y, double lb, double rb, bool direct
 
 void Monkey::move()
 	{
-	if(x == leftBound)
-		{
-		flipImage();
-		isLeft = false;
-		}
-		
-	if(x+width == rightBound)
-		{
-		flipImage();
-		isLeft = true;
-		}
+	handleDirection();
 
 	if(isLeft)
 		{

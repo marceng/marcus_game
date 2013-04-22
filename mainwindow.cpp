@@ -96,13 +96,37 @@ void MainWindow::begin()
    gameScreen->addItem(left);
    objects.push_back(left);
    
-   int leftBound = left->getWidth();
-   int rightBound = WINDOW_MAX_X - right->getWidth();
+   leftBound = left->getWidth();
+   rightBound = WINDOW_MAX_X - right->getWidth();
+
+   Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
+   gameScreen->addItem(myGoat);
+   objects.push_back(myGoat);
    
+   StaticObject *myRope = new StaticObject(rope, 'r', 0, 40+goat->height(), leftBound, rightBound, true);
+   gameScreen->addItem(myRope);
+   objects.push_back(myRope);
+   timer->start();
+	}
+
+void MainWindow::dismissOpening()
+	{
+	title->hide();
+	delete title;
+	display->hide();
+	delete display;
+	nameInput->hide();
+	delete nameInput;
+	
+	start->hide();
+	}
+
+void MainWindow::generateObjects()
+	{/*
 	Star *myStar = new Star(star, 80, 200, leftBound, rightBound, false);
    gameScreen->addItem(myStar);
    objects.push_back(myStar);
-   /*
+   
    Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
@@ -123,21 +147,8 @@ void MainWindow::begin()
    gameScreen->addItem(ice);
    objects.push_back(ice);
   	*/
-   timer->start();
 	}
 
-void MainWindow::dismissOpening()
-	{
-	title->hide();
-	delete title;
-	display->hide();
-	delete display;
-	nameInput->hide();
-	delete nameInput;
-	
-	start->hide();
-	}
-	
 void MainWindow::handleOffscreen()
 	{
 	bool needWall = false;
@@ -151,7 +162,7 @@ void MainWindow::handleOffscreen()
 		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
 			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
-			cout << "Deleting: " << (*it)->getObject() << endl;
+			//cout << "Deleting: " << (*it)->getObject() << endl;
 			(*it)->hide();
 			delete (*it);
 			objects.erase(it);
@@ -187,6 +198,7 @@ void MainWindow::animate()
 		objects[i]->move();
 		}
 	
+	generateObjects();
 	handleOffscreen();
 	}
 

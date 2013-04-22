@@ -7,15 +7,7 @@ Bird::Bird(QPixmap *i, double x, double y, bool direction) :
 
 void Bird::move()
 	{
-	if(isLeft)
-		{
-		--x;
-		}
-	
-	else
-		{
-		++x;
-		}
+	handleDirection();
 	
 	y = sqrt(x);
 	this->setPos(x, y);

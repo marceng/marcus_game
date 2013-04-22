@@ -28,6 +28,7 @@ class GameObject : public QGraphicsPixmapItem
 		double rightBound;
 		bool isLeft;
 		
+		void handleDirection();
 		void flipImage();
 	};
 

@@ -58,6 +58,21 @@ double GameObject::getHeight()
 	return height;
 	}
 
+void GameObject::handleDirection()
+	{
+	if(x <= leftBound)
+		{
+		flipImage();
+		isLeft = false;
+		}
+		
+	if(x+width >= rightBound)
+		{
+		flipImage();
+		isLeft = true;
+		}
+	}
+
 void GameObject::flipImage()
 	{
 	QGraphicsPixmapItem::setPixmap(QPixmap::fromImage(this->pixmap().toImage().mirrored(true, false)));

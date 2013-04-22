@@ -63,6 +63,9 @@ class MainWindow : public QWidget
 		QPixmap *playerB;
 		vector<GameObject*> objects;
 		
+		int leftBound;
+		int rightBound;
+		
 		//---Start Screen---//
 		QLabel *title;
 		QLabel *display;
@@ -73,6 +76,7 @@ class MainWindow : public QWidget
 		void loadOpening();
 		void begin();
 		void dismissOpening();
+		void generateObjects();
 		void handleOffscreen();
 
 	public slots:
