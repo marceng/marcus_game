@@ -1,21 +1,23 @@
-#include "star.h"
+#include "goat.h"
 
-Star::Star(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
+Goat::Goat(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
 	GameObject(i, x, y, lb, rb, direction)
 	{
 	
 	}
 
-void Star::move()
+void Goat::move()
 	{
 	if(x == leftBound)
 		{
 		isLeft = false;
+		flipImage();
 		}
 		
 	if(x+width == rightBound)
 		{
 		isLeft = true;
+		flipImage();
 		}
 
 	if(isLeft)
@@ -29,4 +31,5 @@ void Star::move()
 		++x;
 		this->setPos(x, y);
 		}
+		
 	}

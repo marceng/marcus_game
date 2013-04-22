@@ -1,20 +1,22 @@
-#include "star.h"
+#include "monkey.h"
 
-Star::Star(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
+Monkey::Monkey(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
 	GameObject(i, x, y, lb, rb, direction)
 	{
 	
 	}
 
-void Star::move()
+void Monkey::move()
 	{
 	if(x == leftBound)
 		{
+		flipImage();
 		isLeft = false;
 		}
 		
 	if(x+width == rightBound)
 		{
+		flipImage();
 		isLeft = true;
 		}
 

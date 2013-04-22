@@ -21,6 +21,7 @@
 #include "icicle.h"
 #include "monkey.h"
 #include "star.h"
+#include "wall.h"
 
 #define WINDOW_MAX_X 601
 #define WINDOW_MAX_Y 601
@@ -72,6 +73,7 @@ class MainWindow : public QWidget
 		void loadOpening();
 		void begin();
 		void dismissOpening();
+		void handleOffscreen();
 
 	public slots:
 		/** Handles the timer to move tiles*/

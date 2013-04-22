@@ -85,21 +85,39 @@ void MainWindow::begin()
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
    gameScreen->setFocus();
-  
    gameScreen->addItem(background);
    
-	Star *myStar = new Star(star, 0, 0, 0, WINDOW_MAX_X, true);
+   Wall *right = new Wall(wall, 0, 0, 0, WINDOW_MAX_X, false);
+   gameScreen->addItem(right);
+   objects.push_back(right);	
+   
+   Wall *left = new Wall(wall, 0, 0, 0, WINDOW_MAX_X, true);
+   gameScreen->addItem(left);
+   objects.push_back(left);
+   
+   int leftBound = left->getWidth();
+   int rightBound = WINDOW_MAX_X - right->getWidth();
+   
+	Star *myStar = new Star(star, 0, 0, leftBound, rightBound, true);
    gameScreen->addItem(myStar);
    objects.push_back(myStar);
    
-   Goat *myGoat = new Goat(goat, 0, 40, 0, WINDOW_MAX_X, false);
+   Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
    
-   Icicle *ice = new Icicle(icicle, 0, 90, 0, WINDOW_MAX_X, true);
+   Bird *myBird = new Bird(bird, 200, 190, false);
+   gameScreen->addItem(myBird);
+   objects.push_back(myBird);
+   
+   Monkey *myMonkey = new Monkey(monkey, 90, 0, leftBound, rightBound, false);
+   gameScreen->addItem(myMonkey);
+   objects.push_back(myMonkey);
+   
+   Icicle *ice = new Icicle(icicle, 0, 90, leftBound, rightBound, true);
    gameScreen->addItem(ice);
    objects.push_back(ice);
-   
+  	
    timer->start();
 	}
 
@@ -115,6 +133,21 @@ void MainWindow::dismissOpening()
 	start->hide();
 	}
 	
+void MainWindow::handleOffscreen()
+	{
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+		if((*it)->getX() + (*it)->getWidth() < 0 ||
+			(*it)->getX() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
+			{
+			(*it)->hide();
+			delete (*it);
+			objects.erase(it);
+			--it;
+			}
+		} 
+	}
+
 //---Slots---//
 
 /** When timer is activated, begins the game
@@ -127,6 +160,8 @@ void MainWindow::animate()
 		{
 		objects[i]->move();
 		}
+	
+	handleOffscreen();
 	}
 
 void MainWindow::loadGame()

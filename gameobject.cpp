@@ -1,6 +1,6 @@
 #include "gameobject.h"
 
-GameObject::GameObject(QPixmap *i, int x_, int y_, int lb, int rb, bool direction) : 
+GameObject::GameObject(QPixmap *i, double x_, double y_, double lb, double rb, bool direction) : 
 	QGraphicsPixmapItem(*i)
 	{
 	QGraphicsPixmapItem::setPos(x_, y_);
@@ -13,26 +13,46 @@ GameObject::GameObject(QPixmap *i, int x_, int y_, int lb, int rb, bool directio
 	leftBound = lb;
 	rightBound = rb;
 	isLeft = direction;
+	
+	if(!direction)
+		{
+		flipImage();
+		}
 	}
 
-void GameObject::setX( int x_ )
+void GameObject::setX( double x_ )
 	{
 	x = x_;
 	QGraphicsPixmapItem::setX(x_);
 	}
 	
-void GameObject::setY( int y_ )
+void GameObject::setY( double y_ )
 	{
 	y = y_;
 	QGraphicsPixmapItem::setY(y_);
 	}
 	
-int GameObject::getX()
+double GameObject::getX()
 	{
 	return x;
 	}
 
-int GameObject::getY()
+double GameObject::getY()
 	{
 	return y;
+	}
+
+double GameObject::getWidth()
+	{
+	return width;
+	}
+
+double GameObject::getHeight()
+	{
+	return height;
+	}
+
+void GameObject::flipImage()
+	{
+	QGraphicsPixmapItem::setPixmap(QPixmap::fromImage(this->pixmap().toImage().mirrored(true, false)));
 	}

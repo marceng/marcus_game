@@ -7,21 +7,25 @@
 class GameObject : public QGraphicsPixmapItem
 	{
 	public:
-		GameObject(QPixmap *i, int x, int y, int lb, int rb, bool direction);
-		void setX( int x );
-		void setY( int y );
-	 	int getX();
-		int getY();
+		GameObject(QPixmap *i, double x, double y, double lb, double rb, bool direction);
+		void setX( double x );
+		void setY( double y );
+	 	double getX();
+		double getY();
+		double getWidth();
+		double getHeight();
 		virtual void move() = 0;
 
 	protected:
-		int x;
-		int y;
-		int width;
-		int height;
-		int leftBound;
-		int rightBound;
+		double x;
+		double y;
+		double width;
+		double height;
+		double leftBound;
+		double rightBound;
 		bool isLeft;
+		
+		void flipImage();
 	};
 
 #endif
