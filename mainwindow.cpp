@@ -180,7 +180,6 @@ void MainWindow::handleOffscreen()
 	}
 
 //---Slots---//
-
 /** When timer is activated, begins the game
  	* @param nothing
  	* @return nothing
