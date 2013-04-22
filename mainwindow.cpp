@@ -106,7 +106,7 @@ void MainWindow::begin()
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
    
-   Bird *myBird = new Bird(bird, 200, 190, false);
+   Bird *myBird = new Bird(bird, 200, 280, false);
    gameScreen->addItem(myBird);
    objects.push_back(myBird);
    

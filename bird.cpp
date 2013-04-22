@@ -6,28 +6,17 @@ Bird::Bird(QPixmap *i, double x, double y, bool direction) :
 	}
 
 void Bird::move()
-	{/*
-	if(x == leftBound)
-		{
-		isLeft = false;
-		flipImage();
-		}
-		
-	if(x+width == rightBound)
-		{
-		isLeft = true;
-		flipImage();
-		}*/
-
+	{
 	if(isLeft)
 		{
 		--x;
-		this->setPos(x, y);
 		}
 	
 	else
 		{
 		++x;
-		this->setPos(x, y);
 		}
+	
+	y = sqrt(x);
+	this->setPos(x, y);
 	}

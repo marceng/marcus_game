@@ -23,12 +23,12 @@ void Monkey::move()
 	if(isLeft)
 		{
 		--x;
-		this->setPos(x, y);
 		}
 	
 	else
 		{
 		++x;
-		this->setPos(x, y);
 		}
+	
+	this->setPos(x, y);
 	}

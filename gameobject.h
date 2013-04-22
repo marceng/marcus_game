@@ -3,6 +3,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QtGui>
+#include <cmath>
 
 class GameObject : public QGraphicsPixmapItem
 	{
