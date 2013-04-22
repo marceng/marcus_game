@@ -15,10 +15,13 @@
 #include <cstdlib>
 #include <vector>
 
+#include "gameobject.h"
 #include "star.h"
 
 #define WINDOW_MAX_X 601
 #define WINDOW_MAX_Y 601
+
+using namespace std;
 
 class MainWindow : public QWidget
 	{
@@ -53,7 +56,7 @@ class MainWindow : public QWidget
 		QPixmap *monkey;
 		QPixmap *playerA;
 		QPixmap *playerB;
-
+		vector<GameObject*> objects;
 		
 		//---Start Screen---//
 		QLabel *title;

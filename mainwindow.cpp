@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 
-using namespace std;
-
 /** Constructor that sets up the view to play the game
  	* @param nothing
  	* @return nothing
@@ -78,14 +76,15 @@ void MainWindow::begin()
 	gameScreen = new QGraphicsScene();
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
-   
+   gameScreen->setFocus();
+  
    gameScreen->addItem(background);
    
+	Star *myStar = new Star(star, 0, 0, 0, WINDOW_MAX_X, true);
+   gameScreen->addItem(myStar);
    
-   gameScreen->addItem(Star(star, 0, 0, star->width(), star->height()));
+   objects.push_back(myStar);
    timer->start();
-   
-   
 	}
 
 void MainWindow::dismissOpening()
@@ -108,7 +107,10 @@ void MainWindow::dismissOpening()
  	*/
 void MainWindow::animate()
 	{		
-
+	for(int i = 0; i < (int) objects.size(); ++i)
+		{
+		objects[i]->move();
+		}
 	}
 
 void MainWindow::loadGame()

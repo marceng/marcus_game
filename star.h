@@ -4,9 +4,9 @@
 #include "gameobject.h"
 
 class Star : public GameObject
-	{
+	{	
 	public:
-		Star(QPixmap *i, double x, double y, double w, double h);
+		Star(QPixmap *i, int x, int y, int lb, int rb, bool direction);
 		void move();
 
 	protected:
