@@ -6,9 +6,11 @@ as powerups.
 ----
 
 ## 1. Game Objects/Things
-#### Icicle
-This will be my static object that, if the user touches, will fall off and die. It will
-stick out along the wall, making the user jump across to avoid it.
+#### Static Object
+This will be my static object that will not move like the other things in the game. From this
+class I will derive the walls, icicles, and rope. If the user touches the icicle, they will fall
+off and die. It will stick out along the wall, making the user jump across to avoid it. The wall
+and rope will just scroll down as the timer runs.
 
 #### Bird
 The bird will fly across the screen randomly, probably along a slightly curved path. If
