@@ -1,7 +1,7 @@
 #include "bird.h"
 
 Bird::Bird(QPixmap *i, double x, double y, bool direction) :
-	GameObject(i, x, y, 0, 0, direction)
+	GameObject(i, 'b', x, y, 0, 0, direction)
 	{
 	}
 

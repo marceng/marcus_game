@@ -8,9 +8,10 @@
 class GameObject : public QGraphicsPixmapItem
 	{
 	public:
-		GameObject(QPixmap *i, double x, double y, double lb, double rb, bool direction);
+		GameObject(QPixmap *i, char o, double x, double y, double lb, double rb, bool direction);
 		void setX( double x );
 		void setY( double y );
+		char getObject();
 	 	double getX();
 		double getY();
 		double getWidth();
@@ -18,6 +19,7 @@ class GameObject : public QGraphicsPixmapItem
 		virtual void move() = 0;
 
 	protected:
+		char obj;
 		double x;
 		double y;
 		double width;

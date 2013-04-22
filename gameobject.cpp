@@ -1,10 +1,11 @@
 #include "gameobject.h"
 
-GameObject::GameObject(QPixmap *i, double x_, double y_, double lb, double rb, bool direction) : 
+GameObject::GameObject(QPixmap *i, char o, double x_, double y_, double lb, double rb, bool direction) : 
 	QGraphicsPixmapItem(*i)
 	{
 	QGraphicsPixmapItem::setPos(x_, y_);
 	
+	obj = o;
 	x = x_;
 	y = y_;
 	width = i->width();
@@ -31,7 +32,12 @@ void GameObject::setY( double y_ )
 	y = y_;
 	QGraphicsPixmapItem::setY(y_);
 	}
-	
+
+char GameObject::getObject()
+	{
+	return obj;
+	}
+
 double GameObject::getX()
 	{
 	return x;

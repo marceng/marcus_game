@@ -18,10 +18,9 @@
 #include "gameobject.h"
 #include "bird.h"
 #include "goat.h"
-#include "icicle.h"
 #include "monkey.h"
 #include "star.h"
-#include "wall.h"
+#include "staticobject.h"
 
 #define WINDOW_MAX_X 601
 #define WINDOW_MAX_Y 601
@@ -59,6 +58,7 @@ class MainWindow : public QWidget
 		QPixmap *goat;
 		QPixmap *star;
 		QPixmap *monkey;
+		QPixmap *rope;
 		QPixmap *playerA;
 		QPixmap *playerB;
 		vector<GameObject*> objects;

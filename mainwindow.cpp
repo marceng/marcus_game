@@ -41,6 +41,7 @@ void MainWindow::loadObjects()
 	goat = new QPixmap("Images/Goat.png");
 	star = new QPixmap("Images/Star.png");
 	monkey = new QPixmap("Images/Monkey.png");
+	rope = new QPixmap("Images/Rope.png");
 	//QPixmap *playerA;
 	//QPixmap *playerB;
 	}
@@ -87,21 +88,21 @@ void MainWindow::begin()
    gameScreen->setFocus();
    gameScreen->addItem(background);
    
-   Wall *right = new Wall(wall, 0, 0, 0, WINDOW_MAX_X, false);
+   StaticObject *right = new StaticObject(wall, 'w', 0, 0, 0, WINDOW_MAX_X, false);
    gameScreen->addItem(right);
    objects.push_back(right);	
    
-   Wall *left = new Wall(wall, 0, 0, 0, WINDOW_MAX_X, true);
+   StaticObject *left = new StaticObject(wall, 'w', 0, 0, 0, WINDOW_MAX_X, true);
    gameScreen->addItem(left);
    objects.push_back(left);
    
    int leftBound = left->getWidth();
    int rightBound = WINDOW_MAX_X - right->getWidth();
    
-	Star *myStar = new Star(star, 0, 0, leftBound, rightBound, true);
+	Star *myStar = new Star(star, 80, 200, leftBound, rightBound, false);
    gameScreen->addItem(myStar);
    objects.push_back(myStar);
-   
+   /*
    Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
    gameScreen->addItem(myGoat);
    objects.push_back(myGoat);
@@ -114,10 +115,14 @@ void MainWindow::begin()
    gameScreen->addItem(myMonkey);
    objects.push_back(myMonkey);
    
-   Icicle *ice = new Icicle(icicle, 0, 90, leftBound, rightBound, true);
+   StaticObject *myRope = new StaticObject(rope, 'r', 0, 90, leftBound, rightBound, true);
+   gameScreen->addItem(myRope);
+   objects.push_back(myRope);
+   
+   StaticObject *ice = new StaticObject(icicle, 'i', 0, 90, leftBound, rightBound, true);
    gameScreen->addItem(ice);
    objects.push_back(ice);
-  	
+  	*/
    timer->start();
 	}
 
@@ -137,8 +142,8 @@ void MainWindow::handleOffscreen()
 	{
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-		if((*it)->getX() + (*it)->getWidth() < 0 ||
-			(*it)->getX() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
+		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
+			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
 			(*it)->hide();
 			delete (*it);

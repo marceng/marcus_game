@@ -1,7 +1,7 @@
 #include "monkey.h"
 
 Monkey::Monkey(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
-	GameObject(i, x, y, lb, rb, direction)
+	GameObject(i, 'm', x, y, lb, rb, direction)
 	{
 	
 	}

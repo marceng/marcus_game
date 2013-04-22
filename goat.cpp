@@ -1,7 +1,7 @@
 #include "goat.h"
 
 Goat::Goat(QPixmap *i, double x, double y, double lb, double rb, bool direction) :
-	GameObject(i, x, y, lb, rb, direction)
+	GameObject(i, 'g', x, y, lb, rb, direction)
 	{
 	
 	}
