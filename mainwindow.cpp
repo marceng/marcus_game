@@ -140,17 +140,38 @@ void MainWindow::dismissOpening()
 	
 void MainWindow::handleOffscreen()
 	{
+	bool needWall = false;
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
+		if((*it)->getObject() == 'w' && ((*it)->getY() + (*it)->getHeight()) == WINDOW_MAX_Y)
+			{
+			needWall = true;
+			}
+
 		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
 			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
+			cout << "Deleting: " << (*it)->getObject() << endl;
 			(*it)->hide();
 			delete (*it);
 			objects.erase(it);
 			--it;
 			}
-		} 
+		}
+	
+	//---Generating New Walls---//
+	if(needWall)
+		{
+		StaticObject *right = new StaticObject(wall, 'w', 0, -wall->height()+1, 0, WINDOW_MAX_X, false);
+		gameScreen->addItem(right);
+		objects.push_back(right);	
+		
+		StaticObject *left = new StaticObject(wall, 'w', 0, -wall->height()+1, 0, WINDOW_MAX_X, true);
+		gameScreen->addItem(left);
+		objects.push_back(left);
+		
+		needWall = false;
+		}
 	}
 
 //---Slots---//

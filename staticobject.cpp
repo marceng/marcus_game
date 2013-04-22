@@ -11,13 +11,13 @@ StaticObject::StaticObject(QPixmap *i, char o, double x, double y, double lb, do
 	}
 
 void StaticObject::move()
-	{/*
+	{
 	++y;
-	
+
 	if(isLeft)
 		{
 		x = rightBound - width;
 		}
 	
-	setPos(x, y);*/
+	setPos(x, y);
 	}

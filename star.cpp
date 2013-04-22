@@ -11,13 +11,13 @@ Star::Star(QPixmap *i, double x, double y, double lb, double rb, bool direction)
 
 void Star::move()
 	{
-	if(x == leftBound)
+	if(x <= leftBound)
 		{
 		flipImage();
 		isLeft = false;
 		}
 		
-	if(x+width == rightBound)
+	if(x+width >= rightBound)
 		{
 		flipImage();
 		isLeft = true;
@@ -25,14 +25,14 @@ void Star::move()
 
 	if(isLeft)
 		{
-		--x;
+		x = x-2;
 		}
 	
 	else
 		{
-		++x;
+		x = x+2;
 		}
 		
-	y = y-.1;
+	y = y+.5;
 	this->setPos(x, y);
 	}
