@@ -99,11 +99,6 @@ void MainWindow::begin()
    leftBound = left->getWidth();
    rightBound = WINDOW_MAX_X - right->getWidth();
 
-   Bird *myBird = new Bird(bird, WINDOW_MAX_X+bird->width(), 300, true);
-   //Bird *myBird = new Bird(bird, -bird->width(), 300, false);
-   gameScreen->addItem(myBird);
-   objects.push_back(myBird);
-
    timer->start();
 	}
 
@@ -132,11 +127,20 @@ void MainWindow::generateObjects()
    StaticObject *myRope = new StaticObject(rope, 'r', 0, 40+goat->height(), leftBound, rightBound, true);
    gameScreen->addItem(myRope);
    objects.push_back(myRope);
-   
+  
+   Bird *myBird = new Bird(bird, WINDOW_MAX_X+bird->width(), 300, true);
+   //Bird *myBird = new Bird(bird, -bird->width(), 300, false);
+   gameScreen->addItem(myBird);
+   objects.push_back(myBird);
+  
    Monkey *myMonkey = new Monkey(monkey, 90, 0, leftBound, rightBound, false);
    gameScreen->addItem(myMonkey);
    objects.push_back(myMonkey);
    
+   Monkey *myMonkey = new Monkey(monkey, 150, leftBound, rightBound, true);
+   gameScreen->addItem(myMonkey);
+   objects.push_back(myMonkey);
+
    StaticObject *ice = new StaticObject(icicle, 'i', 0, 90, leftBound, rightBound, true);
    gameScreen->addItem(ice);
    objects.push_back(ice);
