@@ -16,6 +16,10 @@
 #include <vector>
 
 #include "gameobject.h"
+#include "bird.h"
+#include "goat.h"
+#include "icicle.h"
+#include "monkey.h"
 #include "star.h"
 
 #define WINDOW_MAX_X 601

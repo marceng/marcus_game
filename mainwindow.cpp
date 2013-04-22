@@ -34,7 +34,15 @@ void MainWindow::show()
 void MainWindow::loadObjects()
 	{
 	background = new QGraphicsPixmapItem(QPixmap("Images/Background.png"));
+	
+	wall = new QPixmap("Images/Wall.png");
+	icicle = new QPixmap("Images/Icicle.png");
+	bird = new QPixmap("Images/Bird.png");
+	goat = new QPixmap("Images/Goat.png");
 	star = new QPixmap("Images/Star.png");
+	monkey = new QPixmap("Images/Monkey.png");
+	//QPixmap *playerA;
+	//QPixmap *playerB;
 	}
 
 void MainWindow::loadOpening()
@@ -82,8 +90,16 @@ void MainWindow::begin()
    
 	Star *myStar = new Star(star, 0, 0, 0, WINDOW_MAX_X, true);
    gameScreen->addItem(myStar);
-   
    objects.push_back(myStar);
+   
+   Goat *myGoat = new Goat(goat, 0, 40, 0, WINDOW_MAX_X, false);
+   gameScreen->addItem(myGoat);
+   objects.push_back(myGoat);
+   
+   Icicle *ice = new Icicle(icicle, 0, 90, 0, WINDOW_MAX_X, true);
+   gameScreen->addItem(ice);
+   objects.push_back(ice);
+   
    timer->start();
 	}
 
