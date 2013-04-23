@@ -52,7 +52,7 @@ void MainWindow::loadOpening()
 	
 	//---Creating Title---//
 	title = new QLabel("Mountain Climber");	
-	QFont font( "Quicksand", 46);
+	QFont font("Quicksand", 46);
   	title->setFont(font);
 	title->setGeometry(0, 40, WINDOW_MAX_X, 120);
 	title->setAlignment(Qt::AlignCenter);
@@ -61,7 +61,7 @@ void MainWindow::loadOpening()
 	
 	//---Creating Name Input---//
 	display = new QLabel("Enter your name:");
-	QFont font2( "Quicksand");
+	QFont font2("Quicksand");
   	display->setFont(font2);
 	display->setGeometry(WINDOW_MAX_X/2-90, WINDOW_MAX_Y/2+30, 180, 30);
 	display->setAlignment(Qt::AlignCenter);
@@ -82,13 +82,39 @@ void MainWindow::loadOpening()
 
 void MainWindow::begin()
 	{
+	score = 0;
+	
 	//---Creating Game Window---//
 	gameScreen = new QGraphicsScene();
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
    gameScreen->setFocus();
    gameScreen->addItem(background);
-   
+
+	//---Creating Game Labels---//
+	nameLabel = new QLabel(userName);
+	QFont font("Quicksand");
+	font.setPointSize(14);
+  	nameLabel->setFont(font);
+	nameLabel->setGeometry(55, WINDOW_MAX_Y-70, 180, 40);
+	//nameLabel->setAlignment(Qt::AlignCenter);
+	nameLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	gameScreen->addWidget(nameLabel);
+
+	label = new QLabel("Score: ");
+  	label->setFont(font);
+	label->setGeometry(55, WINDOW_MAX_Y-40, 60, 40);
+	//label->setAlignment(Qt::AlignRight);
+	label->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	gameScreen->addWidget(label);
+
+	scoreLabel = new QLabel(QString::number(score));
+  	scoreLabel->setFont(font);
+	scoreLabel->setGeometry(115, WINDOW_MAX_Y-40, 60, 40);
+	//scoreLabel->setAlignment(Qt::AlignRight);
+	scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	gameScreen->addWidget(scoreLabel);
+
    //---Creating Walls---//
    StaticObject *right = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
    gameScreen->addItem(right);
@@ -115,6 +141,8 @@ void MainWindow::dismissOpening()
 	delete title;
 	display->hide();
 	delete display;
+
+	userName = nameInput->text();
 	nameInput->hide();
 	delete nameInput;
 	
@@ -201,6 +229,9 @@ void MainWindow::animate()
 	player->update();
 	generateObjects();
 	handleOffscreen();
+	++score;
+
+	scoreLabel->setText(QString::number(score));
 	}
 
 void MainWindow::loadGame()

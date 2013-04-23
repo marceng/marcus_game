@@ -47,10 +47,7 @@ class MainWindow : public QWidget
 		QGraphicsScene *startScreen;
 		QGraphicsScene *gameScreen;
 		QGraphicsView *view;
-		
-		QTimer *timer;
-		QString userName;
-		
+
 		//---Game Objects---//
 		QGraphicsPixmapItem *background;
 		QPixmap *wall;
@@ -74,6 +71,14 @@ class MainWindow : public QWidget
 		QLabel *display;
 		QLineEdit *nameInput;
 		QPushButton *start;
+		
+		//---Game Screen---//
+		QTimer *timer;
+		QLabel *nameLabel;
+		QLabel *label;
+		QLabel *scoreLabel;
+		QString userName;
+		int score;
 		
 		void loadObjects();
 		void loadOpening();
