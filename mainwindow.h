@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <vector>
 
+#include "climber.h"
 #include "gameobject.h"
 #include "bird.h"
 #include "goat.h"
@@ -61,6 +62,8 @@ class MainWindow : public QWidget
 		QPixmap *rope;
 		QPixmap *playerA;
 		QPixmap *playerB;
+		
+		Climber *player;
 		vector<GameObject*> objects;
 		
 		int leftBound;

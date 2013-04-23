@@ -42,9 +42,8 @@ void MainWindow::loadObjects()
 	star = new QPixmap("Images/Star.png");
 	monkey = new QPixmap("Images/Monkey.png");
 	rope = new QPixmap("Images/Rope.png");
-	
-	//QPixmap *playerA;
-	//QPixmap *playerB;
+	playerA = new QPixmap("Images/ClimberA.png");
+	playerB = new QPixmap("Images/ClimberB.png");
 	}
 
 void MainWindow::loadOpening()
@@ -83,12 +82,14 @@ void MainWindow::loadOpening()
 
 void MainWindow::begin()
 	{
+	//---Creating Game Window---//
 	gameScreen = new QGraphicsScene();
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
    gameScreen->setFocus();
    gameScreen->addItem(background);
    
+   //---Creating Walls---//
    StaticObject *right = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
    gameScreen->addItem(right);
    objects.push_back(right);	
@@ -97,9 +98,14 @@ void MainWindow::begin()
    gameScreen->addItem(left);
    objects.push_back(left);
    
+   //---Setting Bounds---//
    leftBound = left->getWidth();
    rightBound = WINDOW_MAX_X - right->getWidth();
 
+   //---Creating Player---//
+	player = new Climber(playerA, playerB, leftBound, rightBound);
+   gameScreen->addItem(player);
+   
    timer->start();
 	}
 
@@ -157,7 +163,7 @@ void MainWindow::handleOffscreen()
 		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
 			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
-			cout << "Deleting: " << (*it)->getObject() << endl;
+			//cout << "Deleting: " << (*it)->getObject() << endl;
 			(*it)->hide();
 			delete (*it);
 			objects.erase(it);
@@ -165,7 +171,7 @@ void MainWindow::handleOffscreen()
 			}
 		}
 	
-	//---Generating New Walls---//
+	//---Generating New Walls---// find a way to optimize -- maybe hide and show instead of making new
 	if(needWall)
 		{
 		StaticObject *right = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false);
@@ -192,6 +198,7 @@ void MainWindow::animate()
 		objects[i]->move();
 		}
 	
+	player->update();
 	generateObjects();
 	handleOffscreen();
 	}
@@ -204,7 +211,7 @@ void MainWindow::loadGame()
 		display->setText("Error! Enter your name");
 		return;
 		}
-	
+
 	dismissOpening();
 	begin();
 	}
