@@ -42,6 +42,7 @@ void MainWindow::loadObjects()
 	star = new QPixmap("Images/Star.png");
 	monkey = new QPixmap("Images/Monkey.png");
 	rope = new QPixmap("Images/Rope.png");
+	
 	//QPixmap *playerA;
 	//QPixmap *playerB;
 	}
