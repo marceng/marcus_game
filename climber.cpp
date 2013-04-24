@@ -11,23 +11,13 @@ Climber::Climber(QPixmap *i, QPixmap *j, double lb, double rb) :
 
 void Climber::move()
 	{
-	if(x <= leftBound || x >= rightBound)
+	if(x <= leftBound || x + width >= rightBound)
 		{
 		isLeft = !isLeft;
 		flipImage();
-		/*
-		if(x == rightBound)
-			{
-			--x;
-			}
-		
-		else
-			{
-			++x;
-			}*/
 		}
 		
-	if(isLeft)
+	if(!isLeft)
 		{
 		x += 10;
 		}

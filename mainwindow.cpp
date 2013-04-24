@@ -29,10 +29,30 @@ MainWindow::~MainWindow()
    delete timer;
    
    delete background;
-   
    delete start;
+   
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+		delete *it;
+		}
+
+	delete wall;
+	delete icicle;
+	delete bird;
+	delete goat;
+	delete star;
+	delete monkey;
+	delete rope;
+	delete playerA;
+	delete playerB;
+
    delete startScreen;
-   delete gameScreen;
+  
+   if(gameScreen != NULL)
+   	{
+   	delete gameScreen;
+		}
+		
    delete view;
 	}
 
@@ -250,21 +270,10 @@ void MainWindow::animate()
 	//---Movement of Player---//
 	if(movePlayer)
 		{
-		cout << "Moving..." << endl;
 		player->move();
 		
 		if(player->getX() <= leftBound || (player->getX() + player->getWidth()) >= rightBound)
 			{
-			if(player->getX() <= leftBound)
-				{
-				player->setX(leftBound);
-				}
-			
-			else if(player->getX() + player->getWidth() >= rightBound)
-				{
-				player->setX(rightBound - player->getWidth());
-				}
-
 			movePlayer = false;
 			}
 		}
