@@ -14,6 +14,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include "mygraphicsscene.h"
 
 #include "climber.h"
 #include "gameobject.h"
@@ -38,14 +39,20 @@ class MainWindow : public QWidget
 		
 		/** Destructor that deallocates memory*/
 		~MainWindow();
+
+		/** Function to handle pause game*/
+		void pause();
+		
+		/** Function to handle the Key Press*/
+		void spacePressed();
 	
 		/** Displays the window on the screen*/
 		void show();
-    
+
 	private:
 		//---Graphics Stuff---//
-		QGraphicsScene *startScreen;
-		QGraphicsScene *gameScreen;
+		MyGraphicsScene *startScreen;
+		MyGraphicsScene *gameScreen;
 		QGraphicsView *view;
 
 		//---Game Objects---//
@@ -93,8 +100,9 @@ class MainWindow : public QWidget
 		void handleOffscreen();
 
 	public slots:
-		/** Handles the timer to move tiles*/
+		/** Handles the animation once timer runs*/
 		void animate();
+		/** Loads game after opening screen*/
 		void loadGame();
 	};
 

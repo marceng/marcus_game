@@ -6,7 +6,7 @@
  	*/
 MainWindow::MainWindow()
 	{
-   startScreen = new QGraphicsScene();
+   startScreen = new MyGraphicsScene(this);
    startScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view = new QGraphicsView( startScreen );
   
@@ -20,6 +20,30 @@ MainWindow::MainWindow()
    timer = new QTimer(this);
    timer->setInterval(5);
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
+	}
+
+/** Destructor that deallocates memory */
+MainWindow::~MainWindow()
+	{
+   timer->stop();
+   delete timer;
+   
+   delete background;
+   
+   delete start;
+   delete startScreen;
+   delete gameScreen;
+   delete view;
+	}
+
+void MainWindow::pause()
+	{
+   cout << "paused" << endl;
+	}
+
+void MainWindow::spacePressed()
+	{
+   cout << "HERE" << endl;
 	}
 
 /** Displays the game onto the computer screen
@@ -85,12 +109,13 @@ void MainWindow::begin()
 	score = 0;
 	
 	//---Creating Game Window---//
-	gameScreen = new QGraphicsScene();
+	gameScreen = new MyGraphicsScene(this);
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
-   gameScreen->setFocus();
    gameScreen->addItem(background);
 
+	gameScreen->setFocus();
+	
 	//---Creating Game Labels---//
 	nameLabel = new QLabel(userName);
 	QFont font("Quicksand");
@@ -244,18 +269,3 @@ void MainWindow::loadGame()
 	dismissOpening();
 	begin();
 	}
-
-/** Destructor that deallocates memory */
-MainWindow::~MainWindow()
-	{
-   timer->stop();
-   delete timer;
-   
-   delete background;
-   
-   delete start;
-   delete startScreen;
-   delete gameScreen;
-   delete view;
-	}
-
