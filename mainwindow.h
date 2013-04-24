@@ -107,6 +107,7 @@ class MainWindow : public QWidget
 		void begin();
 		void dismissOpening();
 		void generateObjects();
+		void handleCollisions();
 		void handleOffscreen();
 
 	public slots:

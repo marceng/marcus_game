@@ -282,6 +282,40 @@ void MainWindow::generateObjects()
 	
 	++icicleCounter;
 	}
+	
+void MainWindow::handleCollisions()
+	{
+		for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+		{
+		if(player->collidesWithItem((*it)))
+			{
+			if((*it)->getObject() == 'i' || //Collides with Icicle
+				(*it)->getObject() == 'b' || //Collides with Bird
+				(*it)->getObject() == 'm') //Collides with Monkey
+				{
+				isAlive = false;
+				break;
+				}
+			
+			else if((*it)->getObject() == 's') //Collides with Star
+				{
+				//turn invincible for a bit
+				break;
+				}
+			
+			else if((*it)->getObject() == 'g') //Collides with Goat
+				{
+				(*it)->hide();
+				delete (*it);
+				objects.erase(it);
+				--it;
+
+				score += 500;
+				break;
+				}
+			}
+		}
+	}
 
 void MainWindow::handleOffscreen()
 	{
@@ -299,16 +333,18 @@ void MainWindow::handleOffscreen()
 		}
 
 	//---Handling of the Other Objects---//
-	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
-		{
-		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
-			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
+	if(icicleCounter % 10 == 0)
+		{//Removes offscreen objects every ~10 intervals to increse performance
+		for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 			{
-			//cout << "Deleting: " << (*it)->getObject() << endl;
-			(*it)->hide();
-			delete (*it);
-			objects.erase(it);
-			--it;
+			if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
+				(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
+				{
+				(*it)->hide();
+				delete (*it);
+				objects.erase(it);
+				--it;
+				}
 			}
 		}
 	}
@@ -320,9 +356,9 @@ void MainWindow::handleOffscreen()
  	*/
 void MainWindow::animate()
 	{
-	//---Movement of Player---//
 	if(isAlive)
 		{
+		//---Movement of Player---//
 		if(movePlayer)
 			{
 			player->move();
@@ -367,6 +403,19 @@ void MainWindow::animate()
 
 			speed += .25;
 			}
+		
+		handleCollisions();
+		}
+	
+	else
+		{
+		if(player->getY() >= WINDOW_MAX_Y)
+			{
+			cout << "Game Over" << endl;
+			timer->stop();
+			}
+		
+		player->setY(player->getY()+1);
 		}
 	
 	handleOffscreen();
