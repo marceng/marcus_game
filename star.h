@@ -6,7 +6,7 @@
 class Star : public GameObject
 	{	
 	public:
-		Star(QPixmap *i, double x, double y, double lb, double rb, bool direction);
+		Star(QPixmap *i, double x, double y, double lb, double rb, bool direction, double speed);
 		void move();
 
 	protected:

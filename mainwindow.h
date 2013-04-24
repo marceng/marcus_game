@@ -91,9 +91,11 @@ class MainWindow : public QWidget
 		
 		//---Things for Gameplay---//
 		int score;
+		int icicleCounter;
+		double speed;
 		bool movePlayer;
 		bool isAlive;
-		int icicleCounter;
+
 		
 		StaticObject *leftWall1;
 		StaticObject *leftWall2;

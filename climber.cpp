@@ -1,7 +1,7 @@
 #include "climber.h"
 
-Climber::Climber(QPixmap *i, QPixmap *j, double lb, double rb) :
-	GameObject(i, 'c', rb - i->width(), 380, lb, rb, false)
+Climber::Climber(QPixmap *i, QPixmap *j, double lb, double rb, double speed) :
+	GameObject(i, 'c', rb - i->width(), 380, lb, rb, false, speed)
 	{
 	a = i;
 	b = j;
@@ -32,7 +32,7 @@ void Climber::move()
 
 void Climber::update()
 	{
-	if(counter >= 20)
+	if(counter >= 40)
 		{
 		if(toggle)
 			{

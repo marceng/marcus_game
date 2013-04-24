@@ -1,6 +1,6 @@
 #include "gameobject.h"
 
-GameObject::GameObject(QPixmap *i, char o, double x_, double y_, double lb, double rb, bool direction) : 
+GameObject::GameObject(QPixmap *i, char o, double x_, double y_, double lb, double rb, bool direction, double speed) : 
 	QGraphicsPixmapItem(*i)
 	{
 	QGraphicsPixmapItem::setPos(x_, y_);
@@ -14,6 +14,8 @@ GameObject::GameObject(QPixmap *i, char o, double x_, double y_, double lb, doub
 	leftBound = lb;
 	rightBound = rb;
 	isLeft = direction;
+	currentSpeed = speed;
+	
 	
 	if(!direction)
 		{
@@ -56,6 +58,11 @@ double GameObject::getWidth()
 double GameObject::getHeight()
 	{
 	return height;
+	}
+
+void GameObject::speedUp()
+	{
+	currentSpeed += .25;
 	}
 
 void GameObject::handleDirection()

@@ -6,7 +6,7 @@
 class StaticObject : public GameObject
 	{	
 	public:
-		StaticObject(QPixmap *i, char o, double y, double lb, double rb, bool direction);
+		StaticObject(QPixmap *i, char o, double y, double lb, double rb, bool direction, double speed);
 		void move();
 
 	protected:

@@ -1,7 +1,7 @@
 #include "monkey.h"
 
-Monkey::Monkey(QPixmap *i, double y, double lb, double rb, bool direction) :
-	GameObject(i, 'm', 0, y, lb, rb, direction)
+Monkey::Monkey(QPixmap *i, double y, double lb, double rb, bool direction, double speed) :
+	GameObject(i, 'm', 0, y, lb, rb, direction, speed)
 	{
 	if(direction)
 		{
@@ -16,11 +16,12 @@ Monkey::Monkey(QPixmap *i, double y, double lb, double rb, bool direction) :
 void Monkey::move()
 	{
 	int number = (int) rand() % 700;
+	
 	if(number < 10)
 		{
-		y -= 20;
+		y -= 15*currentSpeed;
 		}
 
-	++y;
+	y += currentSpeed;
 	this->setPos(x, y);
 	}

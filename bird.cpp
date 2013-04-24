@@ -1,7 +1,7 @@
 #include "bird.h"
 
-Bird::Bird(QPixmap *i, double x, double y, bool direction) :
-	GameObject(i, 'b', x, y, 0, 0, direction)
+Bird::Bird(QPixmap *i, double x, double y, bool direction, double speed) :
+	GameObject(i, 'b', x, y, 0, 0, direction, speed)
 	{
 	}
 
@@ -18,5 +18,6 @@ void Bird::move()
 		}
 		
 	y = 300 - pow(x,2)/1000;
+	
 	this->setPos(x, y);
 	}

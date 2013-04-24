@@ -18,7 +18,7 @@ MainWindow::MainWindow()
 	
 	//---Creating Timer---///
    timer = new QTimer(this);
-   timer->setInterval(1);
+   timer->setInterval(5);
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
 	}
 
@@ -139,9 +139,10 @@ void MainWindow::loadOpening()
 void MainWindow::begin()
 	{
 	score = 0;
+	icicleCounter = 0;
+	speed = 1.0;
 	movePlayer = false;
 	isAlive = true;
-	icicleCounter = 0;
 
 	//---Creating Game Window---//
 	gameScreen = new MyGraphicsScene(this);
@@ -185,10 +186,10 @@ void MainWindow::begin()
 	gameScreen->addWidget(scoreLabel);
 
    //---Creating Walls---//   
-   leftWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, true);
-	rightWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
-	leftWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, true);
-	rightWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false);
+   leftWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, true, speed);
+	rightWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false, speed);
+	leftWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, true, speed);
+	rightWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false, speed);
    
    gameScreen->addItem(leftWall1);
    gameScreen->addItem(rightWall1);
@@ -200,7 +201,7 @@ void MainWindow::begin()
    rightBound = WINDOW_MAX_X - rightWall1->getWidth();
 
    //---Creating Player---//
-	player = new Climber(playerA, playerB, leftBound, rightBound);
+	player = new Climber(playerA, playerB, leftBound, rightBound, speed);
    gameScreen->addItem(player);
    
    timer->start();
@@ -233,7 +234,7 @@ void MainWindow::generateObjects()
 
 	if(0 <= generator && generator < 20 && icicleCounter > 100) // Icicle
 		{
-	   StaticObject *ice = new StaticObject(icicle, 'i', -icicle->height(), leftBound, rightBound, temp);
+	   StaticObject *ice = new StaticObject(icicle, 'i', -icicle->height(), leftBound, rightBound, temp, speed);
    	gameScreen->addItem(ice);
    	objects.push_back(ice);
 
@@ -242,7 +243,7 @@ void MainWindow::generateObjects()
 	
 	else if(30 <= generator && generator < 33)//Star
 		{
-		Star *myStar = new Star(star, randomX, -star->height(), leftBound, rightBound, temp);
+		Star *myStar = new Star(star, randomX, -star->height(), leftBound, rightBound, temp, speed);
    	gameScreen->addItem(myStar);
    	objects.push_back(myStar);
 		}
@@ -256,25 +257,25 @@ void MainWindow::generateObjects()
 			side = WINDOW_MAX_X+bird->width();
 			}
 
-	   Bird *myBird = new Bird(bird, side, 300, temp);
+	   Bird *myBird = new Bird(bird, side, 300, temp, speed);
    	gameScreen->addItem(myBird);
    	objects.push_back(myBird);
 		}
 	
 	else if(500 <= generator && generator < 509)//Goat
 		{		
-	  	Goat *myGoat = new Goat(goat, randomX, -goat->height()-1, leftBound, rightBound, temp);
+	  	Goat *myGoat = new Goat(goat, randomX, -goat->height()-1, leftBound, rightBound, temp, speed);
 		gameScreen->addItem(myGoat);
 		objects.push_back(myGoat);
 		
-		StaticObject *myRope = new StaticObject(rope, 'r', -1, leftBound, rightBound, true);
+		StaticObject *myRope = new StaticObject(rope, 'r', -1, leftBound, rightBound, true, speed);
 		gameScreen->addItem(myRope);
 		objects.push_back(myRope);
 		}
 
 	else if(800 <= generator && generator < 810)//Monkey
 		{
-		Monkey *myMonkey = new Monkey(monkey, -monkey->height(), leftBound, rightBound, temp);
+		Monkey *myMonkey = new Monkey(monkey, -monkey->height(), leftBound, rightBound, temp, speed);
 		gameScreen->addItem(myMonkey);
 		objects.push_back(myMonkey);
 		}
@@ -285,16 +286,16 @@ void MainWindow::generateObjects()
 void MainWindow::handleOffscreen()
 	{
 	//---Handling of the Walls---//
-	if(leftWall1->getY() == WINDOW_MAX_Y)
+	if(leftWall1->getY() >= WINDOW_MAX_Y)
 		{
-		leftWall1->setY(-wall->height()+2);
-		rightWall1->setY(-wall->height()+2);
+		leftWall1->setY(-wall->height() + 2 + (leftWall1->getY() - WINDOW_MAX_Y));
+		rightWall1->setY(-wall->height() + 2 + (rightWall1->getY() - WINDOW_MAX_Y));
 		}
 	
-	else if(leftWall2->getY() == WINDOW_MAX_Y)
+	else if(leftWall2->getY() >= WINDOW_MAX_Y)
 		{
-		leftWall2->setY(-wall->height()+2);
-		rightWall2->setY(-wall->height()+2);
+		leftWall2->setY(-wall->height() + 2 + (leftWall2->getY() - WINDOW_MAX_Y));
+		rightWall2->setY(-wall->height() + 2 + (rightWall2->getY() - WINDOW_MAX_Y));
 		}
 
 	//---Handling of the Other Objects---//
@@ -352,9 +353,19 @@ void MainWindow::animate()
 		++score;
 		scoreLabel->setText(QString::number(score));
 		
-		if(score % 500 == 0) // For every 500 your score goes up, the timer speeds up
+		if(score % 2000 == 0) // For every 500 your score goes up, the timer speeds up
 			{
+			for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+				{
+				(*it)->speedUp();
+				}
+			
+			leftWall1->speedUp();
+			rightWall1->speedUp();
+			leftWall2->speedUp();
+			rightWall2->speedUp();
 
+			speed += .25;
 			}
 		}
 	

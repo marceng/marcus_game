@@ -6,7 +6,7 @@
 class Climber : public GameObject
 	{	
 	public:
-		Climber(QPixmap *i, QPixmap *j, double lb, double rb);
+		Climber(QPixmap *i, QPixmap *j, double lb, double rb, double speed);
 		void move();
 		void update();
 
