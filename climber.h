@@ -9,12 +9,15 @@ class Climber : public GameObject
 		Climber(QPixmap *i, QPixmap *j, double lb, double rb, double speed);
 		void move();
 		void update();
+		void setInvincible(bool inv);
+		bool isInvincible();
 
-	protected:
+	private:
 		QPixmap *a;
 		QPixmap *b;
 		bool toggle;
 		int counter;
+		bool invincible;
 	};
 
 #endif

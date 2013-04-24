@@ -17,7 +17,7 @@ void Bird::move()
 		x += 2;
 		}
 		
-	y = 300 - pow(x,2)/1000;
+	y = 400 - pow(x,2)/800;
 	
 	this->setPos(x, y);
 	}

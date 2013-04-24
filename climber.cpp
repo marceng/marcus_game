@@ -7,6 +7,7 @@ Climber::Climber(QPixmap *i, QPixmap *j, double lb, double rb, double speed) :
 	b = j;
 	toggle = false;
 	counter = 0;
+	invincible = false;
 	}
 
 void Climber::move()
@@ -32,7 +33,7 @@ void Climber::move()
 
 void Climber::update()
 	{
-	if(counter >= 40)
+	if(counter >= 50)
 		{
 		if(toggle)
 			{
@@ -57,4 +58,15 @@ void Climber::update()
 		{
 		++counter;
 		}
+	
+	}
+
+bool Climber::isInvincible()
+	{
+	return invincible;
+	}
+
+void Climber::setInvincible(bool inv)
+	{
+	invincible = inv;
 	}
