@@ -11,7 +11,33 @@ Climber::Climber(QPixmap *i, QPixmap *j, double lb, double rb) :
 
 void Climber::move()
 	{
-
+	if(x <= leftBound || x >= rightBound)
+		{
+		isLeft = !isLeft;
+		flipImage();
+		/*
+		if(x == rightBound)
+			{
+			--x;
+			}
+		
+		else
+			{
+			++x;
+			}*/
+		}
+		
+	if(isLeft)
+		{
+		x += 10;
+		}
+		
+	else
+		{
+		x -= 10;
+		}
+	
+	this->setPos(x, y);
 	}
 
 void Climber::update()

@@ -86,6 +86,7 @@ class MainWindow : public QWidget
 		QLabel *scoreLabel;
 		QString userName;
 		int score;
+		bool movePlayer;
 		
 		StaticObject *leftWall1;
 		StaticObject *leftWall2;

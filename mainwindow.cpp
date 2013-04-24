@@ -50,7 +50,7 @@ void MainWindow::pause()
 
 void MainWindow::spacePressed()
 	{
-  	cout << "HERE" << endl;
+	movePlayer = true;
 	}
 
 /** Displays the game onto the computer screen
@@ -114,6 +114,7 @@ void MainWindow::loadOpening()
 void MainWindow::begin()
 	{
 	score = 0;
+	movePlayer = false;
 
 	//---Creating Game Window---//
 	gameScreen = new MyGraphicsScene(this);
@@ -245,12 +246,36 @@ void MainWindow::handleOffscreen()
  	* @return nothing
  	*/
 void MainWindow::animate()
-	{	
+	{
+	//---Movement of Player---//
+	if(movePlayer)
+		{
+		cout << "Moving..." << endl;
+		player->move();
+		
+		if(player->getX() <= leftBound || (player->getX() + player->getWidth()) >= rightBound)
+			{
+			if(player->getX() <= leftBound)
+				{
+				player->setX(leftBound);
+				}
+			
+			else if(player->getX() + player->getWidth() >= rightBound)
+				{
+				player->setX(rightBound - player->getWidth());
+				}
+
+			movePlayer = false;
+			}
+		}
+	
+	//---Movement of Game Things---//
 	for(int i = 0; i < (int) objects.size(); ++i)
 		{
 		objects[i]->move();
 		}
 
+	//---Movement of Walls---//
 	leftWall1->move();
 	rightWall1->move();
 	leftWall2->move();
