@@ -140,6 +140,8 @@ void MainWindow::begin()
 	{
 	score = 0;
 	movePlayer = false;
+	isAlive = true;
+	icicleCounter = 0;
 
 	//---Creating Game Window---//
 	gameScreen = new MyGraphicsScene(this);
@@ -219,32 +221,65 @@ void MainWindow::dismissOpening()
 	}
 
 void MainWindow::generateObjects()
-	{/*
-	Star *myStar = new Star(star, 80, 200, leftBound, rightBound, false);
-   gameScreen->addItem(myStar);
-   objects.push_back(myStar);
-   
-   Goat *myGoat = new Goat(goat, 140, 40, leftBound, rightBound, true);
-   gameScreen->addItem(myGoat);
-   objects.push_back(myGoat);
-   
-   StaticObject *myRope = new StaticObject(rope, 'r', 40+goat->height(), leftBound, rightBound, true);
-   gameScreen->addItem(myRope);
-   objects.push_back(myRope);
-  
-   Bird *myBird = new Bird(bird, WINDOW_MAX_X+bird->width(), 300, true);
-   //Bird *myBird = new Bird(bird, -bird->width(), 300, false);
-   gameScreen->addItem(myBird);
-   objects.push_back(myBird);
-   
-   Monkey *myMonkey = new Monkey(monkey, 150, leftBound, rightBound, true);
-   gameScreen->addItem(myMonkey);
-   objects.push_back(myMonkey);
+	{
+	int generator = rand() % 15000;
+	int randomX = 50 + rand() % 380;
+	bool temp = false;
 
-   StaticObject *ice = new StaticObject(icicle, 'i', 90, leftBound, rightBound, true);
-   gameScreen->addItem(ice);
-   objects.push_back(ice);
-  	*/
+	if(generator % 2 == 0)
+		{
+		temp = true;
+		}
+
+	if(0 <= generator && generator < 20 && icicleCounter > 100) // Icicle
+		{
+	   StaticObject *ice = new StaticObject(icicle, 'i', -icicle->height(), leftBound, rightBound, temp);
+   	gameScreen->addItem(ice);
+   	objects.push_back(ice);
+
+   	icicleCounter = 0;
+		}
+	
+	else if(30 <= generator && generator < 33)//Star
+		{
+		Star *myStar = new Star(star, randomX, -star->height(), leftBound, rightBound, temp);
+   	gameScreen->addItem(myStar);
+   	objects.push_back(myStar);
+		}
+	
+	else if(100 <= generator && generator < 103)//Bird
+		{
+		int side = -bird->width();
+		
+		if(temp)
+			{
+			side = WINDOW_MAX_X+bird->width();
+			}
+
+	   Bird *myBird = new Bird(bird, side, 300, temp);
+   	gameScreen->addItem(myBird);
+   	objects.push_back(myBird);
+		}
+	
+	else if(500 <= generator && generator < 509)//Goat
+		{		
+	  	Goat *myGoat = new Goat(goat, randomX, -goat->height()-1, leftBound, rightBound, temp);
+		gameScreen->addItem(myGoat);
+		objects.push_back(myGoat);
+		
+		StaticObject *myRope = new StaticObject(rope, 'r', -1, leftBound, rightBound, true);
+		gameScreen->addItem(myRope);
+		objects.push_back(myRope);
+		}
+
+	else if(800 <= generator && generator < 810)//Monkey
+		{
+		Monkey *myMonkey = new Monkey(monkey, -monkey->height(), leftBound, rightBound, temp);
+		gameScreen->addItem(myMonkey);
+		objects.push_back(myMonkey);
+		}
+	
+	++icicleCounter;
 	}
 
 void MainWindow::handleOffscreen()
@@ -285,37 +320,40 @@ void MainWindow::handleOffscreen()
 void MainWindow::animate()
 	{
 	//---Movement of Player---//
-	if(movePlayer)
+	if(isAlive)
 		{
-		player->move();
-		
-		if(player->getX() <= leftBound || (player->getX() + player->getWidth()) >= rightBound)
+		if(movePlayer)
 			{
-			movePlayer = false;
+			player->move();
+		
+			if(player->getX() <= leftBound || (player->getX() + player->getWidth()) >= rightBound)
+				{
+				movePlayer = false;
+				}
 			}
-		}
-	else
-		{
-		player->update();
+		else
+			{
+			player->update();
+			}
+	
+		//---Movement of Game Things---//
+		for(int i = 0; i < (int) objects.size(); ++i)
+			{
+			objects[i]->move();
+			}
+
+		//---Movement of Walls---//
+		leftWall1->move();
+		rightWall1->move();
+		leftWall2->move();
+		rightWall2->move();
+
+		generateObjects();
+		++score;
+		scoreLabel->setText(QString::number(score));
 		}
 	
-	//---Movement of Game Things---//
-	for(int i = 0; i < (int) objects.size(); ++i)
-		{
-		objects[i]->move();
-		}
-
-	//---Movement of Walls---//
-	leftWall1->move();
-	rightWall1->move();
-	leftWall2->move();
-	rightWall2->move();
-
-	generateObjects();
 	handleOffscreen();
-	++score;
-
-	scoreLabel->setText(QString::number(score));
 	}
 
 void MainWindow::loadGame()

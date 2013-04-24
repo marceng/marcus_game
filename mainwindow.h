@@ -91,6 +91,8 @@ class MainWindow : public QWidget
 		QString userName;
 		int score;
 		bool movePlayer;
+		bool isAlive;
+		int icicleCounter;//Used to help stagger icicle generation
 		
 		StaticObject *leftWall1;
 		StaticObject *leftWall2;
