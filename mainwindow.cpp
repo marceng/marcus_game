@@ -97,36 +97,35 @@ void MainWindow::begin()
 	font.setPointSize(14);
   	nameLabel->setFont(font);
 	nameLabel->setGeometry(55, WINDOW_MAX_Y-70, 180, 40);
-	//nameLabel->setAlignment(Qt::AlignCenter);
 	nameLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
 	gameScreen->addWidget(nameLabel);
 
 	label = new QLabel("Score: ");
   	label->setFont(font);
 	label->setGeometry(55, WINDOW_MAX_Y-40, 60, 40);
-	//label->setAlignment(Qt::AlignRight);
 	label->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
 	gameScreen->addWidget(label);
 
 	scoreLabel = new QLabel(QString::number(score));
   	scoreLabel->setFont(font);
 	scoreLabel->setGeometry(115, WINDOW_MAX_Y-40, 60, 40);
-	//scoreLabel->setAlignment(Qt::AlignRight);
 	scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
 	gameScreen->addWidget(scoreLabel);
 
-   //---Creating Walls---//
-   StaticObject *right = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
-   gameScreen->addItem(right);
-   objects.push_back(right);	
+   //---Creating Walls---//   
+   leftWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, true);
+	rightWall1 = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, false);
+	leftWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, true);
+	rightWall2 = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false);
    
-   StaticObject *left = new StaticObject(wall, 'w', 0, 0, WINDOW_MAX_X, true);
-   gameScreen->addItem(left);
-   objects.push_back(left);
+   gameScreen->addItem(leftWall1);
+   gameScreen->addItem(rightWall1);
+   gameScreen->addItem(leftWall2);
+   gameScreen->addItem(rightWall2);
    
    //---Setting Bounds---//
-   leftBound = left->getWidth();
-   rightBound = WINDOW_MAX_X - right->getWidth();
+   leftBound = leftWall1->getWidth();
+   rightBound = WINDOW_MAX_X - rightWall1->getWidth();
 
    //---Creating Player---//
 	player = new Climber(playerA, playerB, leftBound, rightBound);
@@ -180,14 +179,22 @@ void MainWindow::generateObjects()
 
 void MainWindow::handleOffscreen()
 	{
-	bool needWall = false;
+	//---Handling of the Walls---//
+	if(leftWall1->getY() == WINDOW_MAX_Y)
+		{
+		leftWall1->setY(-wall->height()+2);
+		rightWall1->setY(-wall->height()+2);
+		}
+	
+	else if(leftWall2->getY() == WINDOW_MAX_Y)
+		{
+		leftWall2->setY(-wall->height()+2);
+		rightWall2->setY(-wall->height()+2);
+		}
+
+	//---Handling of the Other Objects---//
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
-		if((*it)->getObject() == 'w' && ((*it)->getY() + (*it)->getHeight()) == WINDOW_MAX_Y)
-			{
-			needWall = true;
-			}
-
 		if((*it)->getX() + (*it)->getWidth()*2 < 0 ||
 			(*it)->getX() - (*it)->getWidth() > WINDOW_MAX_X || (*it)->getY() > WINDOW_MAX_Y)
 			{
@@ -198,20 +205,6 @@ void MainWindow::handleOffscreen()
 			--it;
 			}
 		}
-	
-	//---Generating New Walls---// find a way to optimize -- maybe hide and show instead of making new
-	if(needWall)
-		{
-		StaticObject *right = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, false);
-		gameScreen->addItem(right);
-		objects.push_back(right);	
-		
-		StaticObject *left = new StaticObject(wall, 'w', -wall->height()+1, 0, WINDOW_MAX_X, true);
-		gameScreen->addItem(left);
-		objects.push_back(left);
-		
-		needWall = false;
-		}
 	}
 
 //---Slots---//
@@ -220,12 +213,17 @@ void MainWindow::handleOffscreen()
  	* @return nothing
  	*/
 void MainWindow::animate()
-	{		
+	{	
 	for(int i = 0; i < (int) objects.size(); ++i)
 		{
 		objects[i]->move();
 		}
-	
+
+	leftWall1->move();
+	rightWall1->move();
+	leftWall2->move();
+	rightWall2->move();
+
 	player->update();
 	generateObjects();
 	handleOffscreen();

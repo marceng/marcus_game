@@ -80,6 +80,11 @@ class MainWindow : public QWidget
 		QString userName;
 		int score;
 		
+		StaticObject *leftWall1;
+		StaticObject *leftWall2;
+		StaticObject *rightWall1;
+		StaticObject *rightWall2;
+		
 		void loadObjects();
 		void loadOpening();
 		void begin();
