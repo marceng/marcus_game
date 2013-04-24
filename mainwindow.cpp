@@ -18,7 +18,7 @@ MainWindow::MainWindow()
 	
 	//---Creating Timer---///
    timer = new QTimer(this);
-   timer->setInterval(5);
+   timer->setInterval(1);
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
 	}
 
@@ -351,6 +351,11 @@ void MainWindow::animate()
 		generateObjects();
 		++score;
 		scoreLabel->setText(QString::number(score));
+		
+		if(score % 500 == 0) // For every 500 your score goes up, the timer speeds up
+			{
+
+			}
 		}
 	
 	handleOffscreen();

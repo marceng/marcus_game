@@ -87,12 +87,13 @@ class MainWindow : public QWidget
 		
 		QPushButton *returnButton;
 		QPushButton *quitButton;
-		
 		QString userName;
+		
+		//---Things for Gameplay---//
 		int score;
 		bool movePlayer;
 		bool isAlive;
-		int icicleCounter;//Used to help stagger icicle generation
+		int icicleCounter;
 		
 		StaticObject *leftWall1;
 		StaticObject *leftWall2;
