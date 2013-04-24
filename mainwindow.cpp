@@ -46,13 +46,14 @@ MainWindow::~MainWindow()
 	delete playerA;
 	delete playerB;
 
-   delete startScreen;
-  
    if(gameScreen != NULL)
    	{
-   	delete gameScreen;
+   	//delete returnButton;
+ 		//delete quitButton;
+   	//delete gameScreen;
 		}
-		
+
+   delete startScreen;
    delete view;
 	}
 
@@ -61,10 +62,14 @@ void MainWindow::pause()
 	if(timer->isActive())
 		{
 		timer->stop();
+		returnButton->show();
+		quitButton->show();
 		}
 	else
 		{
 		timer->start();
+		returnButton->hide();
+		quitButton->hide();
 		}
 	}
 
@@ -141,8 +146,20 @@ void MainWindow::begin()
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view->setScene( gameScreen );
    gameScreen->addItem(background);
-
 	gameScreen->setFocus();
+	
+	//---Creating Menu Buttons---//
+	returnButton = new QPushButton("Return");
+	connect(returnButton, SIGNAL(clicked()), this, SLOT(returnGame()));
+	returnButton->setGeometry(WINDOW_MAX_X/2-60, WINDOW_MAX_Y/2-60, 120, 60);
+	gameScreen->addWidget(returnButton);
+  	returnButton->hide();
+  	
+  	quitButton = new QPushButton("Quit");
+   connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+	quitButton->setGeometry(WINDOW_MAX_X/2-60, WINDOW_MAX_Y/2, 120, 60);
+	gameScreen->addWidget(quitButton);
+	quitButton->hide();
 	
 	//---Creating Game Labels---//
 	nameLabel = new QLabel(userName);
@@ -277,6 +294,10 @@ void MainWindow::animate()
 			movePlayer = false;
 			}
 		}
+	else
+		{
+		player->update();
+		}
 	
 	//---Movement of Game Things---//
 	for(int i = 0; i < (int) objects.size(); ++i)
@@ -290,7 +311,6 @@ void MainWindow::animate()
 	leftWall2->move();
 	rightWall2->move();
 
-	player->update();
 	generateObjects();
 	handleOffscreen();
 	++score;
@@ -309,4 +329,9 @@ void MainWindow::loadGame()
 
 	dismissOpening();
 	begin();
+	}
+
+void MainWindow::returnGame()
+	{
+	pause();
 	}

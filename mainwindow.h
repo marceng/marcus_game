@@ -84,6 +84,10 @@ class MainWindow : public QWidget
 		QLabel *nameLabel;
 		QLabel *label;
 		QLabel *scoreLabel;
+		
+		QPushButton *returnButton;
+		QPushButton *quitButton;
+		
 		QString userName;
 		int score;
 		bool movePlayer;
@@ -105,6 +109,8 @@ class MainWindow : public QWidget
 		void animate();
 		/** Loads game after opening screen*/
 		void loadGame();
+		/** Calls pause function*/
+		void returnGame();
 	};
 
 #endif // MAINWINDOW_H
