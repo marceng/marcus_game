@@ -6,7 +6,7 @@
  	*/
 MainWindow::MainWindow()
 	{
-   startScreen = new MyGraphicsScene(this);
+   startScreen = new QGraphicsScene();
    startScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);
    view = new QGraphicsView( startScreen );
   
@@ -38,12 +38,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::pause()
 	{
-   cout << "paused" << endl;
+	if(timer->isActive())
+		{
+		timer->stop();
+		}
+	else
+		{
+		timer->start();
+		}
 	}
 
 void MainWindow::spacePressed()
 	{
-   cout << "HERE" << endl;
+  	cout << "HERE" << endl;
 	}
 
 /** Displays the game onto the computer screen
@@ -107,7 +114,7 @@ void MainWindow::loadOpening()
 void MainWindow::begin()
 	{
 	score = 0;
-	
+
 	//---Creating Game Window---//
 	gameScreen = new MyGraphicsScene(this);
    gameScreen->setSceneRect(1, 1, WINDOW_MAX_X-2, WINDOW_MAX_Y-2);

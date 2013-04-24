@@ -51,7 +51,7 @@ class MainWindow : public QWidget
 
 	private:
 		//---Graphics Stuff---//
-		MyGraphicsScene *startScreen;
+		QGraphicsScene *startScreen;
 		MyGraphicsScene *gameScreen;
 		QGraphicsView *view;
 
