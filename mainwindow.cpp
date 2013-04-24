@@ -15,6 +15,7 @@ MainWindow::MainWindow()
 
 	loadObjects();
 	loadOpening();
+	gameScreen = NULL;
 	
 	//---Creating Timer---///
    timer = new QTimer(this);
@@ -27,15 +28,14 @@ MainWindow::~MainWindow()
 	{
    timer->stop();
    delete timer;
-   
-   delete background;
    delete start;
-   
+
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
 		delete *it;
 		}
 
+   delete background;
 	delete wall;
 	delete icicle;
 	delete bird;
@@ -48,6 +48,20 @@ MainWindow::~MainWindow()
 
    if(gameScreen != NULL)
    	{
+	  	if(!isAlive)
+			{
+			delete endLabel;
+			}
+  
+     	delete nameLabel;
+		delete label;
+		delete scoreLabel;
+  
+   	delete player;
+   	delete leftWall1;
+		delete leftWall2;
+		delete rightWall1;
+		delete rightWall2;
    	//delete returnButton;
  		//delete quitButton;
    	//delete gameScreen;
@@ -59,17 +73,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::pause()
 	{
-	if(timer->isActive())
+	if(isAlive)
 		{
-		timer->stop();
-		returnButton->show();
-		quitButton->show();
-		}
-	else
-		{
-		timer->start();
-		returnButton->hide();
-		quitButton->hide();
+		if(timer->isActive())
+			{
+			timer->stop();
+			returnButton->show();
+			quitButton->show();
+			}
+		else
+			{
+			timer->start();
+			returnButton->hide();
+			quitButton->hide();
+			}
 		}
 	}
 
@@ -112,7 +129,7 @@ void MainWindow::loadOpening()
   	title->setFont(font);
 	title->setGeometry(0, 40, WINDOW_MAX_X, 120);
 	title->setAlignment(Qt::AlignCenter);
-	title->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	title->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
 	startScreen->addWidget(title);
 	
 	//---Creating Name Input---//
@@ -121,7 +138,7 @@ void MainWindow::loadOpening()
   	display->setFont(font2);
 	display->setGeometry(WINDOW_MAX_X/2-90, WINDOW_MAX_Y/2+30, 180, 30);
 	display->setAlignment(Qt::AlignCenter);
-	display->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : white;");
+	display->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:white;");
 	startScreen->addWidget(display);
 	
 	nameInput = new QLineEdit();
@@ -140,6 +157,7 @@ void MainWindow::begin()
 	{
 	score = 0;
 	icicleCounter = 0;
+	invCounter = 0;
 	speed = 1.0;
 	movePlayer = false;
 	isAlive = true;
@@ -150,7 +168,7 @@ void MainWindow::begin()
    view->setScene( gameScreen );
    gameScreen->addItem(background);
 	gameScreen->setFocus();
-	
+
 	//---Creating Menu Buttons---//
 	returnButton = new QPushButton("Return");
 	connect(returnButton, SIGNAL(clicked()), this, SLOT(returnGame()));
@@ -170,19 +188,19 @@ void MainWindow::begin()
 	font.setPointSize(14);
   	nameLabel->setFont(font);
 	nameLabel->setGeometry(55, WINDOW_MAX_Y-70, 180, 40);
-	nameLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	nameLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
 	gameScreen->addWidget(nameLabel);
 
 	label = new QLabel("Score: ");
   	label->setFont(font);
 	label->setGeometry(55, WINDOW_MAX_Y-40, 60, 40);
-	label->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	label->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
 	gameScreen->addWidget(label);
 
 	scoreLabel = new QLabel(QString::number(score));
   	scoreLabel->setFont(font);
 	scoreLabel->setGeometry(115, WINDOW_MAX_Y-40, 60, 40);
-	scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0); color : yellow;");
+	scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
 	gameScreen->addWidget(scoreLabel);
 
    //---Creating Walls---//   
@@ -289,9 +307,8 @@ void MainWindow::handleCollisions()
 		{
 		if(player->collidesWithItem((*it)))
 			{
-			if((*it)->getObject() == 'i' || //Collides with Icicle
-				(*it)->getObject() == 'b' || //Collides with Bird
-				(*it)->getObject() == 'm') //Collides with Monkey
+			if(!player->isInvincible() && ((*it)->getObject() == 'i' || //Collides with Icicle
+				(*it)->getObject() == 'b' || (*it)->getObject() == 'm')) //Collides with Bird or Monkey
 				{
 				isAlive = false;
 				break;
@@ -299,7 +316,16 @@ void MainWindow::handleCollisions()
 			
 			else if((*it)->getObject() == 's') //Collides with Star
 				{
-				//turn invincible for a bit
+				(*it)->hide();
+				delete (*it);
+				objects.erase(it);
+				--it;
+				
+				player->setInvincible(true);
+				label->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
+				scoreLabel->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
+				invCounter = 2000;
+				
 				break;
 				}
 			
@@ -349,6 +375,20 @@ void MainWindow::handleOffscreen()
 		}
 	}
 
+
+void MainWindow::callEnd()
+	{
+	endLabel = new QLabel("Game Over!");
+	QFont font("Quicksand", 36);
+  	endLabel->setFont(font);
+  	endLabel->setAlignment(Qt::AlignCenter);
+	endLabel->setGeometry(0, 40, WINDOW_MAX_X, 80);
+	endLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:red;");
+	gameScreen->addWidget(endLabel);
+
+	quitButton->show();
+	}
+
 //---Slots---//
 /** When timer is activated, begins the game
  	* @param nothing
@@ -385,11 +425,26 @@ void MainWindow::animate()
 		leftWall2->move();
 		rightWall2->move();
 
+
+		//---Handling of Object Generation and Score---//
 		generateObjects();
 		++score;
 		scoreLabel->setText(QString::number(score));
 		
-		if(score % 2000 == 0) // For every 500 your score goes up, the timer speeds up
+		//---Handling of Invincibility---//
+		if(invCounter > 0)
+			{
+			--invCounter;
+			}
+			
+		else if(invCounter <= 0 && player->isInvincible())
+			{
+			player->setInvincible(false);
+			label->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
+			scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
+			}
+		
+		if(score % 2000 == 0) // For every 2000 your score goes up, the timer speeds up
 			{
 			for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 				{
@@ -411,11 +466,13 @@ void MainWindow::animate()
 		{
 		if(player->getY() >= WINDOW_MAX_Y)
 			{
-			cout << "Game Over" << endl;
+			callEnd();
 			timer->stop();
 			}
-		
-		player->setY(player->getY()+1);
+		else
+			{
+			player->setY(player->getY()+1);
+			}
 		}
 	
 	handleOffscreen();
@@ -424,6 +481,7 @@ void MainWindow::animate()
 void MainWindow::loadGame()
 	{
 	userName = nameInput->text();
+
 	if(userName == "")
 		{
 		display->setText("Error! Enter your name");

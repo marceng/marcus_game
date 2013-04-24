@@ -84,7 +84,8 @@ class MainWindow : public QWidget
 		QLabel *nameLabel;
 		QLabel *label;
 		QLabel *scoreLabel;
-		
+		QLabel *endLabel;
+
 		QPushButton *returnButton;
 		QPushButton *quitButton;
 		QString userName;
@@ -92,10 +93,10 @@ class MainWindow : public QWidget
 		//---Things for Gameplay---//
 		int score;
 		int icicleCounter;
+		int invCounter;
 		double speed;
 		bool movePlayer;
 		bool isAlive;
-
 		
 		StaticObject *leftWall1;
 		StaticObject *leftWall2;
@@ -109,6 +110,7 @@ class MainWindow : public QWidget
 		void generateObjects();
 		void handleCollisions();
 		void handleOffscreen();
+		void callEnd();
 
 	public slots:
 		/** Handles the animation once timer runs*/
