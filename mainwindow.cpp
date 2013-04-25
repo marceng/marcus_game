@@ -23,7 +23,10 @@ MainWindow::MainWindow()
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
 	}
 
-/** Destructor that deallocates memory */
+/** Destructor that deallocates memory
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 MainWindow::~MainWindow()
 	{
    timer->stop();
@@ -72,6 +75,11 @@ MainWindow::~MainWindow()
    delete view;
 	}
 
+/** When called, freezes the timer and displays a menu of buttons
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
+
 void MainWindow::pause()
 	{
 	if(isAlive)
@@ -91,6 +99,10 @@ void MainWindow::pause()
 		}
 	}
 
+/** Called when user presses the spacebar, triggers action that makes user move
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::spacePressed()
 	{
 	movePlayer = true;
@@ -105,6 +117,10 @@ void MainWindow::show()
    view->show();
 	}
 
+/** Called when program begins, loads images into program from files
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::loadObjects()
 	{
 	background = new QGraphicsPixmapItem(QPixmap("Images/Background.png"));
@@ -119,6 +135,10 @@ void MainWindow::loadObjects()
 	playerB = new QPixmap("Images/ClimberB.png");
 	}
 
+/** Loads the opening screen of the game
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::loadOpening()
 	{
 	startScreen->addItem(background);
@@ -165,6 +185,10 @@ void MainWindow::loadOpening()
 	startScreen->addWidget(start);
 	}
 
+/** Called after the opening screen is dismissed, initializes and begins the game
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::begin()
 	{
 	score = 0;
@@ -237,6 +261,10 @@ void MainWindow::begin()
    timer->start();
 	}
 
+/** Dismisses the opening screen
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::dismissOpening()
 	{
 	title->hide();
@@ -253,6 +281,10 @@ void MainWindow::dismissOpening()
 	start->hide();
 	}
 
+/** Called every iteration of the timer, generates objects randomly
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::generateObjects()
 	{
 	int generator = rand() % 15000;
@@ -314,7 +346,11 @@ void MainWindow::generateObjects()
 	
 	++icicleCounter;
 	}
-	
+
+/** Called in every iteration of the timer, handles collision between player and objects
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::handleCollisions()
 	{
 	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
@@ -357,6 +393,10 @@ void MainWindow::handleCollisions()
 		}
 	}
 
+/** Called every iteration of the timer, deletes objects off the screen
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::handleOffscreen()
 	{
 	//---Handling of the Walls---//
@@ -389,7 +429,10 @@ void MainWindow::handleOffscreen()
 		}
 	}
 
-
+/** When the game ends, displays game over and provides a quit button
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::callEnd()
 	{
 	endLabel = new QLabel("Game Over!");
@@ -492,6 +535,10 @@ void MainWindow::animate()
 	handleOffscreen();
 	}
 
+/** Function to begin the game after user inputs a name
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::loadGame()
 	{
 	userName = nameInput->text();
@@ -506,6 +553,10 @@ void MainWindow::loadGame()
 	begin();
 	}
 
+/** Function to unpause the game
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void MainWindow::returnGame()
 	{
 	pause();

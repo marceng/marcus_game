@@ -1,11 +1,23 @@
 #include "goat.h"
 
+/** Constructor to initialize bird object
+ 	* @param QPixmap a pointer to the image
+ 	* @param double the x coordinate
+ 	* @param double the y coordinate
+ 	* @param bool the direction of the object
+ 	* @param double the rate of movement
+ 	* @return nothing
+ 	*/
 Goat::Goat(QPixmap *i, double x, double y, double lb, double rb, bool direction, double speed) :
 	GameObject(i, 'g', x, y, lb, rb, direction, speed)
 	{
 	
 	}
 
+/** The Goats's move function.
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void Goat::move()
 	{
 	handleDirection();
