@@ -1,5 +1,6 @@
 # Mountain Climber
 ![alt text](Images/ClimberA.png "Player")
+
 The purpose of the game is to climb as high as you can by jumping from wall to wall while
 avoiding obstacles. There will be animals that make you fall as well as those that act
 as powerups.
@@ -17,12 +18,14 @@ and rope will just scroll down as the timer runs.
 
 #### Bird
 ![alt text](Images/Bird.png "Bird")
+
 The bird will fly across the screen randomly, probably along a slightly curved path. If
 the user touches during gameplay, then they will fall and lose the game. The bird should be
 a simple image imported into the program.
 
 #### Goat
 ![alt text](Images/Goat.png "Goat")
+
 The goat will act like a "bonus" to add to the users score if they user collides with the goat.
 There will be a rope (static object) that goes between the two walls on each side of the window and
 the goat will move across this rope. The goat as well as the rope (two separate objects) should
@@ -30,6 +33,7 @@ be simple images imported into the program. (The user will be able to go through
 
 #### Star
 ![alt text](Images/Star.png "Star")
+
 The star will move jump across each side of the screen (or each wall of the mountain),
 making it difficult to catch. It will be relatively small. The star will be able to go
 through obstacles like icicles and will go across the screen randomly. If the user catches
@@ -40,6 +44,7 @@ green. The star will not show up very often and will be from an imported image.
 
 #### Monkey
 ![alt text](Images/Monkey.png "Monkey")
+
 The monkey will climb up and down along the walls. If the player comes in contact with
 a monkey, then they will fall down and lose. The monkey will not jump across the screen,
 rather, it will only stay on one side where it will ascend and descend randomly (being able
