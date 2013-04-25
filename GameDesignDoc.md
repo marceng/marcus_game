@@ -28,8 +28,9 @@ a simple image imported into the program.
 
 The goat will act like a "bonus" to add to the users score if they user collides with the goat.
 There will be a rope (static object) that goes between the two walls on each side of the window and
-the goat will move across this rope. The goat as well as the rope (two separate objects) should
-be simple images imported into the program. (The user will be able to go through the rope)
+the goat will move across this rope, randomly changing directions. The goat as well as the
+rope (two separate objects) should be simple images imported into the program. (The user will
+be able to go through the rope).
 
 #### Star
 ![alt text](Images/Star.png "Star")

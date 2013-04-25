@@ -1,4 +1,4 @@
-#include "climber.h"
+ #include "climber.h"
 
 /** Constructor to initialize bird object
  	* @param QPixmap* a pointer to the first image
@@ -49,7 +49,7 @@ void Climber::move()
  	*/
 void Climber::update()
 	{
-	if(counter >= 30)
+	if(counter >= 15)
 		{
 		if(toggle)
 			{
