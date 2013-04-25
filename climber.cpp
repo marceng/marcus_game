@@ -32,12 +32,12 @@ void Climber::move()
 		
 	if(!isLeft)
 		{
-		x += 10;
+		x += 40;
 		}
 		
 	else
 		{
-		x -= 10;
+		x -= 40;
 		}
 	
 	this->setPos(x, y);
@@ -49,7 +49,7 @@ void Climber::move()
  	*/
 void Climber::update()
 	{
-	if(counter >= 50)
+	if(counter >= 30)
 		{
 		if(toggle)
 			{

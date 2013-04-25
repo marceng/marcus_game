@@ -29,11 +29,11 @@ void Monkey::move()
 	{
 	int number = (int) rand() % 700;
 	
-	if(number < 10)
+	if(number < 15)
 		{
-		y -= 15*currentSpeed;
+		y -= 20*currentSpeed;
 		}
 
-	y += currentSpeed;
+	y += 4*currentSpeed;
 	this->setPos(x, y);
 	}

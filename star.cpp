@@ -24,14 +24,14 @@ void Star::move()
 	
 	if(isLeft)
 		{
-		x -= 2*currentSpeed;
+		x -= 8*currentSpeed;
 		}
 	
 	else
 		{
-		x += 2*currentSpeed;
+		x += 8*currentSpeed;
 		}
 		
-	y += .5*currentSpeed;
+	y += 2*currentSpeed;
 	this->setPos(x, y);
 	}

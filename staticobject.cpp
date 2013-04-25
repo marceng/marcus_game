@@ -28,6 +28,6 @@ StaticObject::StaticObject(QPixmap *i, char o, double y, double lb, double rb, b
  	*/
 void StaticObject::move()
 	{
-	y += currentSpeed;
+	y += 4*currentSpeed;
 	setPos(x, y);
 	}

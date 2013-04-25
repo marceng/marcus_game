@@ -103,7 +103,7 @@ double GameObject::getHeight()
  	*/
 void GameObject::speedUp()
 	{
-	currentSpeed += .25;
+	currentSpeed += .5;
 	}
 
 /** A function to handle the direction of the object and update its image accordingly

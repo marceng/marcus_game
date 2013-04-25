@@ -21,15 +21,15 @@ void Bird::move()
 	{
 	if(isLeft)
 		{
-		x -= 2;
+		x -= 8;
 		}
 
 	else
 		{
-		x += 2;
+		x += 8;
 		}
 		
-	y = 400 - pow(x,2)/800;
+	y = 600 - pow(x,2)/500;
 	
 	this->setPos(x, y);
 	}

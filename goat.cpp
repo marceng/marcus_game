@@ -24,12 +24,12 @@ void Goat::move()
 
 	if(isLeft)
 		{
-		x -= .5*currentSpeed;
+		x -= 2*currentSpeed;
 		}
 	
 	else
 		{
-		x += .5*currentSpeed;
+		x += 2*currentSpeed;
 		}
 	
 	int number = (int) rand() % 4000;
@@ -49,6 +49,6 @@ void Goat::move()
 			}
 		}
 	
-	y += currentSpeed;
+	y += 4*currentSpeed;
 	this->setPos(x, y);
 	}

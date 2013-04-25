@@ -19,7 +19,7 @@ MainWindow::MainWindow()
 	
 	//---Creating Timer---///
    timer = new QTimer(this);
-   timer->setInterval(5);
+   timer->setInterval(20);
    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
 	}
 
@@ -168,7 +168,7 @@ void MainWindow::loadOpening()
 
 	//---Creating Instruction Label---//
 	instructionLabel= new QLabel("INSTRUCTIONS:\n\n"
-									"-Jump from side to side using the space bar\n"
+									"-Jump from side to side using space\n"
 									"-Avoid icicles, monkeys, and birds\n"
 									"-Capture goats and stars for bonuses\n"
 									"-Press 'P' to pause the game");
@@ -287,7 +287,7 @@ void MainWindow::dismissOpening()
  	*/
 void MainWindow::generateObjects()
 	{
-	int generator = rand() % 15000;
+	int generator = rand() % 8000;
 	int randomX = 50 + rand() % 380;
 	bool temp = false;
 
@@ -296,7 +296,7 @@ void MainWindow::generateObjects()
 		temp = true;
 		}
 
-	if(0 <= generator && generator < 20 && icicleCounter > 100) // Icicle
+	if(0 <= generator && generator < 25 && icicleCounter > 100) // Icicle
 		{
 	   StaticObject *ice = new StaticObject(icicle, 'i', -icicle->height(), leftBound, rightBound, temp, speed);
    	gameScreen->addItem(ice);
@@ -305,7 +305,7 @@ void MainWindow::generateObjects()
    	icicleCounter = 0;
 		}
 	
-	else if(30 <= generator && generator < 33)//Star
+	else if(30 <= generator && generator < 32)//Star
 		{
 		Star *myStar = new Star(star, randomX, -star->height(), leftBound, rightBound, temp, speed);
    	gameScreen->addItem(myStar);
@@ -374,7 +374,7 @@ void MainWindow::handleCollisions()
 				player->setInvincible(true);
 				label->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
 				scoreLabel->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
-				invCounter = 2000;
+				invCounter = 1200;
 				
 				break;
 				}
@@ -492,6 +492,20 @@ void MainWindow::animate()
 		if(invCounter > 0)
 			{
 			--invCounter;
+			
+			if(invCounter < 200)
+				{
+				if(invCounter % 10 == 0)
+					{
+					label->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:yellow;");
+					scoreLabel->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:yellow;");
+					}
+				else if(invCounter % 10 == 5)
+					{
+					label->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
+					scoreLabel->setStyleSheet("background-color:rgba(255, 255, 255, 0); color:green;");
+					}
+				}
 			}
 			
 		else if(invCounter <= 0 && player->isInvincible())
@@ -501,7 +515,7 @@ void MainWindow::animate()
 			scoreLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:yellow;");
 			}
 		
-		if(score % 2000 == 0) // For every 2000 your score goes up, the timer speeds up
+		if(score % 1500 == 0) // For every 1500 your score goes up, the timer speeds up
 			{
 			for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 				{
@@ -513,7 +527,7 @@ void MainWindow::animate()
 			leftWall2->speedUp();
 			rightWall2->speedUp();
 
-			speed += .25;
+			speed += .5;
 			}
 		
 		handleCollisions();
@@ -528,7 +542,7 @@ void MainWindow::animate()
 			}
 		else
 			{
-			player->setY(player->getY()+1);
+			player->setY(player->getY()+4);
 			}
 		}
 	
