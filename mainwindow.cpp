@@ -62,9 +62,10 @@ MainWindow::~MainWindow()
 		delete leftWall2;
 		delete rightWall1;
 		delete rightWall2;
-   	//delete returnButton;
- 		//delete quitButton;
-   	//delete gameScreen;
+		
+   	delete returnButton;
+ 		delete quitButton;
+   	delete gameScreen;
 		}
 
    delete startScreen;
@@ -107,7 +108,6 @@ void MainWindow::show()
 void MainWindow::loadObjects()
 	{
 	background = new QGraphicsPixmapItem(QPixmap("Images/Background.png"));
-	
 	wall = new QPixmap("Images/Wall.png");
 	icicle = new QPixmap("Images/Icicle.png");
 	bird = new QPixmap("Images/Bird.png");
@@ -146,10 +146,22 @@ void MainWindow::loadOpening()
 	nameInput->setAlignment(Qt::AlignCenter);
 	startScreen->addWidget(nameInput);
 
+	//---Creating Instruction Label---//
+	instructionLabel= new QLabel("INSTRUCTIONS:\n\n"
+									"-Jump from side to side using the space bar\n"
+									"-Avoid icicles, monkeys, and birds\n"
+									"-Capture goats and stars for bonuses\n"
+									"-Press 'P' to pause the game");
+	QFont font3("Quicksand", 8);
+  	instructionLabel->setFont(font3);	
+	instructionLabel->setGeometry(WINDOW_MAX_X/2-100, WINDOW_MAX_Y/2+95, 215, 80);
+	instructionLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:white;");
+	startScreen->addWidget(instructionLabel);
+
 	//---Creating Start Button---//
 	start = new QPushButton("Begin!"); 
 	connect(start, SIGNAL(clicked()), this, SLOT(loadGame()));
-	start->setGeometry(WINDOW_MAX_X/2-30, WINDOW_MAX_Y/2+180, 60, 60);
+	start->setGeometry(WINDOW_MAX_X/2-45, WINDOW_MAX_Y/2+180, 90, 30);
 	startScreen->addWidget(start);
 	}
 
@@ -231,6 +243,8 @@ void MainWindow::dismissOpening()
 	delete title;
 	display->hide();
 	delete display;
+	instructionLabel->hide();
+	delete instructionLabel;
 
 	userName = nameInput->text();
 	nameInput->hide();
@@ -303,7 +317,7 @@ void MainWindow::generateObjects()
 	
 void MainWindow::handleCollisions()
 	{
-		for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
+	for(std::vector<GameObject*>::iterator it = objects.begin(); it != objects.end(); ++it)
 		{
 		if(player->collidesWithItem((*it)))
 			{

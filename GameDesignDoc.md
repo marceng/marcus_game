@@ -25,16 +25,15 @@ be simple images imported into the program. (The user will be able to go through
 
 #### Star
 The star will move jump across each side of the screen (or each wall of the mountain),
-making it difficult to catch. It will be relatively small, and will ascend the mountain also.
-The star will be able to go through obstacles like icicles and will go across the screen randomly.
-If the user catches (or collides) with it, then the user will become "invincible"
-for a certain height (being unaffected by birds and icicles) as they would run through/clip
-the things that normally would make them fall. The star will not show up very often and
-will be from an imported image.
+making it difficult to catch. It will be relatively small. The star will be able to go
+through obstacles like icicles and will go across the screen randomly. If the user catches
+(or collides) with it, then the user will become "invincible" for a certain time (being
+unaffected by birds and icicles) as they would run through/clip the things that normally
+would make them fall. The star will not show up very often and will be from an imported image.
 
-#### Snow Monkey
-The snow monkey will climb up and down along the walls. If the player comes in contact with
-a monkey, then they will fall down and lose. The snow monkey will not jump across the screen,
+#### Monkey
+The monkey will climb up and down along the walls. If the player comes in contact with
+a monkey, then they will fall down and lose. The monkey will not jump across the screen,
 rather, it will only stay on one side where it will ascend and descend randomly. It will
 be created from an image on the internet.
 

@@ -36,16 +36,12 @@ class MainWindow : public QWidget
 	public:
 		/** constructor that sets of the MainWindow view*/
 		explicit MainWindow();
-		
 		/** Destructor that deallocates memory*/
 		~MainWindow();
-
 		/** Function to handle pause game*/
 		void pause();
-		
 		/** Function to handle the Key Press*/
 		void spacePressed();
-	
 		/** Displays the window on the screen*/
 		void show();
 
@@ -76,6 +72,7 @@ class MainWindow : public QWidget
 		//---Start Screen---//
 		QLabel *title;
 		QLabel *display;
+		QLabel *instructionLabel;
 		QLineEdit *nameInput;
 		QPushButton *start;
 		
@@ -103,13 +100,21 @@ class MainWindow : public QWidget
 		StaticObject *rightWall1;
 		StaticObject *rightWall2;
 		
+		/** Loads the images into the program for later use*/
 		void loadObjects();
+		/** Loads the opening screen once program begins*/
 		void loadOpening();
+		/** Once called, dismisses opening screen and starts game*/
 		void begin();
+		/** Gets rid of opening screen, deallocating necessary things*/
 		void dismissOpening();
+		/** Creates random things to place into game*/
 		void generateObjects();
+		/** Handles collisions between player and objects in game*/
 		void handleCollisions();
+		/** Handles things that leave the view by deallocating them from memory*/
 		void handleOffscreen();
+		/** Called when the user dies to display quit button and label*/
 		void callEnd();
 
 	public slots:
