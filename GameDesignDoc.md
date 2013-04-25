@@ -12,6 +12,8 @@ class I will derive the walls, icicles, and rope. If the user touches the icicle
 off and die. It will stick out along the wall, making the user jump across to avoid it. The wall
 and rope will just scroll down as the timer runs.
 
+![alt text](Images/Icicle.png "Icicle")
+
 #### Bird
 The bird will fly across the screen randomly, probably along a slightly curved path. If
 the user touches during gameplay, then they will fall and lose the game. The bird should be
@@ -19,7 +21,7 @@ a simple image imported into the program.
 
 #### Goat
 The goat will act like a "bonus" to add to the users score if they user collides with the goat.
-There will be a rope that goes between the two walls on each side of the window and
+There will be a rope (static object) that goes between the two walls on each side of the window and
 the goat will move across this rope. The goat as well as the rope (two separate objects) should
 be simple images imported into the program. (The user will be able to go through the rope)
 
@@ -29,13 +31,14 @@ making it difficult to catch. It will be relatively small. The star will be able
 through obstacles like icicles and will go across the screen randomly. If the user catches
 (or collides) with it, then the user will become "invincible" for a certain time (being
 unaffected by birds and icicles) as they would run through/clip the things that normally
-would make them fall. The star will not show up very often and will be from an imported image.
+would make them fall. The score label will indicate when the player in invincible by turning
+green. The star will not show up very often and will be from an imported image.
 
 #### Monkey
 The monkey will climb up and down along the walls. If the player comes in contact with
 a monkey, then they will fall down and lose. The monkey will not jump across the screen,
-rather, it will only stay on one side where it will ascend and descend randomly. It will
-be created from an image on the internet.
+rather, it will only stay on one side where it will ascend and descend randomly (being able
+to go through icicles along the wall). It will be created from an image on the internet.
 
 ----
 
@@ -55,9 +58,8 @@ There will also be goats to add bonuses to the score. There is no way to have yo
 ----
 
 ## 4. Player Life Tracking
-Right now, I do not plan on giving lives. When the player falls or touches an enemy, they die and the
-game ends. If I need to give them lives, they will respawn from the height (which will be kept track
-of) where they had fallen off from, deducting one of their lives.
+When the player falls or touches an enemy, they die and the game ends. They will not have lives,
+the player will have to go as high as they can in one life.
 
 ----
 
