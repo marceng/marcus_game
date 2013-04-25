@@ -5,8 +5,8 @@
   + USC ID: 5075243074
 
 ### Game Information
-  + Game Name: myAwsomeGame
-  + Game Description: One sentence game description
+  + Game Name: Mountain Climber
+  + Game Description: Climb the mountain avoiding objects and capturing powerups
   + [Game Design Doc](GameDesignDoc.md)
 
 
@@ -14,12 +14,11 @@
 The grader should use the following procedure to compile and run the code:
 ```shell
 #Compile Instructions
-echo "Write command here"
+echo "qmake -project"
+echo "qmake"
+echo "make"
 #Doxygen Instructions
-echo "Write command here"
+echo "doxygen config.txt"
 #Command to run
-echo "Write command here"
+echo "./game_marcuste"
 ```
-
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.
