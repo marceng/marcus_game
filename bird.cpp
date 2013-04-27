@@ -21,12 +21,12 @@ void Bird::move()
 	{
 	if(isLeft)
 		{
-		x -= 8;
+		x -= 5;
 		}
 
 	else
 		{
-		x += 8;
+		x += 5;
 		}
 		
 	y = 600 - pow(x,2)/500;

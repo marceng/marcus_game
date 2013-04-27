@@ -59,7 +59,7 @@ MainWindow::~MainWindow()
      	delete nameLabel;
 		delete label;
 		delete scoreLabel;
-  
+  		
    	delete player;
    	delete leftWall1;
 		delete leftWall2;
@@ -287,7 +287,7 @@ void MainWindow::dismissOpening()
  	*/
 void MainWindow::generateObjects()
 	{
-	int generator = rand() % 8000;
+	int generator = rand() % 7000 - (score/10); //As time progresses, things show up more frequently
 	int randomX = 50 + rand() % 380;
 	bool temp = false;
 
@@ -296,7 +296,7 @@ void MainWindow::generateObjects()
 		temp = true;
 		}
 
-	if(0 <= generator && generator < 25 && icicleCounter > 100) // Icicle
+	if(0 <= generator && generator < 25 && icicleCounter > 70) // Icicle
 		{
 	   StaticObject *ice = new StaticObject(icicle, 'i', -icicle->height(), leftBound, rightBound, temp, speed);
    	gameScreen->addItem(ice);
@@ -312,7 +312,7 @@ void MainWindow::generateObjects()
    	objects.push_back(myStar);
 		}
 	
-	else if(100 <= generator && generator < 103)//Bird
+	else if(100 <= generator && generator < 102)//Bird
 		{
 		int side = -bird->width();
 		
@@ -337,7 +337,7 @@ void MainWindow::generateObjects()
 		objects.push_back(myRope);
 		}
 
-	else if(800 <= generator && generator < 810)//Monkey
+	else if(800 <= generator && generator < 806)//Monkey
 		{
 		Monkey *myMonkey = new Monkey(monkey, -monkey->height(), leftBound, rightBound, temp, speed);
 		gameScreen->addItem(myMonkey);
