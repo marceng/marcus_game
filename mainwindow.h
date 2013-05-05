@@ -12,9 +12,13 @@
 #include <QLabel>
 
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
 #include <vector>
+#include <string>
+#include <map>
 #include "mygraphicsscene.h"
+#include "scorehandler.h"
 
 #include "climber.h"
 #include "gameobject.h"
@@ -46,6 +50,8 @@ class MainWindow : public QWidget
 		void show();
 
 	private:
+		ScoreHandler scoreHandler;
+		
 		//---Graphics Stuff---//
 		QGraphicsScene *startScreen;
 		MyGraphicsScene *gameScreen;
@@ -73,6 +79,7 @@ class MainWindow : public QWidget
 		QLabel *title;
 		QLabel *display;
 		QLabel *instructionLabel;
+		QLabel *scoreList;
 		QLineEdit *nameInput;
 		QPushButton *start;
 		

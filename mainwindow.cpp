@@ -53,6 +53,8 @@ MainWindow::~MainWindow()
    	{
 	  	if(!isAlive)
 			{
+			scoreHandler.insertScore(userName.toStdString(), score);
+			scoreHandler.write();
 			delete endLabel;
 			}
   
@@ -141,6 +143,7 @@ void MainWindow::loadObjects()
  	*/
 void MainWindow::loadOpening()
 	{
+	scoreHandler.read();
 	startScreen->addItem(background);
 	
 	//---Creating Title---//
@@ -177,6 +180,51 @@ void MainWindow::loadOpening()
 	instructionLabel->setGeometry(WINDOW_MAX_X/2-100, WINDOW_MAX_Y/2+95, 215, 80);
 	instructionLabel->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:white;");
 	startScreen->addWidget(instructionLabel);
+
+	//---Creating High Score List---//
+	map<int, string> tempScores = scoreHandler.getScores();	
+	string scoreString = "HIGH SCORES\nName\t\tScore\n\n";
+	
+	int counter = 0;
+	for(map<int, string>::reverse_iterator it = tempScores.rbegin(); it != tempScores.rend(); ++it)
+		{
+		stringstream ss;
+		ss << it->first;
+		string temp = ss.str();
+
+		scoreString += it->second;
+		
+		if(it->second.length() > 7)
+			{
+			scoreString += "\t";
+			}
+		else
+			{
+			scoreString += "\t\t";
+			}
+		
+		scoreString += temp;
+		
+		++counter;
+		
+		if(counter < (int) tempScores.size())
+			{
+			scoreString += "\n";
+			}
+		}
+
+	scoreList = new QLabel(QString::fromStdString(scoreString));
+	QFont font4("Quicksand", 9);
+  	scoreList->setFont(font4);
+  	scoreList->setAlignment(Qt::AlignVCenter);
+   scoreList->setGeometry(WINDOW_MAX_X/2-74, 120, 148, 214);
+   scoreList->setStyleSheet("background-color: rgba(255, 255, 255, 0);color:red;");
+   startScreen->addWidget(scoreList);
+
+	if(tempScores.size() == 0)
+		{
+		scoreList->hide();
+		}
 
 	//---Creating Start Button---//
 	start = new QPushButton("Begin!"); 
