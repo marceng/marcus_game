@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/** A function to handle reading the high score file before gameplay begins
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void ScoreHandler::read()
 	{
 	ifstream myfile("Score.txt");
@@ -13,7 +17,7 @@ void ScoreHandler::read()
 		return;
    	}
 
-	int counter = 0;//Used to keep only the top 10 scores
+	int counter = 0; //Used to keep only the top 10 scores
 
    while(myfile.good() && counter < 10)
 		{
@@ -30,11 +34,20 @@ void ScoreHandler::read()
     	}
 	}
 
+/** A function that inserts a user's score into the high score table
+ 	* @param string the name of the player
+ 	* @param int the score of the player from that game
+ 	* @return nothing
+ 	*/
 void ScoreHandler::insertScore(string name, int score)
 	{
 	highscores.insert(pair<int,string>(score, name));
 	}
 
+/** A function to write out the current high score table to a text file
+ 	* @param nothing
+ 	* @return nothing
+ 	*/
 void ScoreHandler::write()
   	{
   	ofstream ofile; // Initializes ofstream object to work with
@@ -55,6 +68,10 @@ void ScoreHandler::write()
 	ofile.close();
 	}
 
+/** A function that returns the current score table
+ 	* @param nothing
+ 	* @return map<int, string> containing the information of high scores
+ 	*/
 map<int, string>& ScoreHandler::getScores()
 	{
 	return highscores;
