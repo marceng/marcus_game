@@ -66,6 +66,10 @@ higher up the mountain.
 Score will be tracked by how high the player gets (the higher up the mountain, the higher the score).
 There will also be goats to add bonuses to the score. There is no way to have your score go down.
 
+High scores are kept track of by saving scores with usernames to a .txt file. When a game is completed
+(when the player dies), the score is saved to the file. The next time the game is opened, the list
+of high scores will be displayed. See example-Score.txt for sample file that is created.
+
 ----
 
 ## 4. Player Life Tracking
