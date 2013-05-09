@@ -14,13 +14,13 @@
 ### Compile & Run Instructions
 The grader should use the following procedure to compile and run the code:
 
-##Compile Instructions
-qmake -project
-qmake
-make
+###Compile Instructions
+  + qmake -project
+  + qmake
+  + make
 
-##Doxygen Instructions
-doxygen config.txt
+###Doxygen Instructions
+  + doxygen config.txt
 
-##Command to run
-./game_marcuste
+###Command to run
+  + ./game_marcuste
