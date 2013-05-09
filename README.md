@@ -9,7 +9,7 @@
   + Game Description: Climb the mountain avoiding objects and capturing powerups
   + [Game Design Doc](GameDesignDoc.md)
 
-#Refer to LICENSE for reuse of code
+###Refer to LICENSE for reuse of code
 
 ### Compile & Run Instructions
 The grader should use the following procedure to compile and run the code:
